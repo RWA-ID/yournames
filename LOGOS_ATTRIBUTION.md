@@ -24,3 +24,22 @@ the date downloaded. If a brand's guidelines prohibit this usage, OMIT the brand
 | GoDaddy | `godaddy.svg` | https://aboutus.godaddy.net/newsroom | https://www.godaddy.com/legal | — | TODO — not yet added |
 
 Caption shown in the UI: "These platforms recognize ENS names. We are not affiliated with them."
+
+## Hero ribbon chain logos (`/public/logos/chains/`)
+
+Official chain/token marks shown on the capsules riding the Cosmos hero ribbon. Sourced
+from the Trust Wallet Assets repository (community-maintained aggregate of **official**
+brand logos, MIT-licensed repo; each logo remains the property of its brand):
+https://github.com/trustwallet/assets
+
+| Chain | File | Asset source (raw path under `blockchains/`) | Downloaded | Status |
+|---|---|---|---|---|
+| Ethereum | `chains/ethereum.png` | `ethereum/info/logo.png` | 2026-06-09 | Added |
+| Bitcoin | `chains/bitcoin.png` | `bitcoin/info/logo.png` | 2026-06-09 | Added |
+| Solana | `chains/solana.png` | `solana/info/logo.png` | 2026-06-09 | Added |
+| Polygon | `chains/polygon.png` | `polygon/info/logo.png` | 2026-06-09 | Added |
+| Avalanche | `chains/avalanche.png` | `avalanchec/info/logo.png` | 2026-06-09 | Added |
+| BNB Chain | `chains/bnb.png` | `smartchain/info/logo.png` | 2026-06-09 | Added |
+
+Usage is nominative (identifying the chains ENS names interoperate with); logos are shown
+unmodified at small capsule size. We are not affiliated with or endorsed by these brands.
