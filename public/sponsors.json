@@ -1,0 +1,4 @@
+{
+  "_comment": "Sponsor slots for yournames.eth. Fill a slot with {name, tagline, url} or set to null to show the 'available' placeholder. Slots are always labeled 'Sponsored' in the UI. Contact: info@onchain-id.id",
+  "slots": [null, null, null]
+}

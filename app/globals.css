@@ -1,26 +1,107 @@
 @import "tailwindcss";
 
+/*
+ * yournames.eth design tokens.
+ * Light, warm, trustworthy — Stripe/Rainbow-level polish, zero hacker-dark vibes.
+ * Display: Sora (--font-sora). Body: Inter (--font-inter). Set via next/font in layout.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fdfdfc;
+  --foreground: #101828;
+  --muted: #667085;
+  --surface: #ffffff;
+  --line: #eaecf0;
+  --brand: #4f46e5; /* indigo-600 */
+  --brand-soft: #eef2ff;
+  --sky: #0ea5e9;
+  --mint: #10b981;
+  --rose: #f43f5e;
+  --amber: #f59e0b;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-muted: var(--muted);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
+  --color-skyx: var(--sky);
+  --color-mint: var(--mint);
+  --color-rosex: var(--rose);
+  --color-amberx: var(--amber);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sora), var(--font-inter), ui-sans-serif, sans-serif;
+  --shadow-soft: 0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 24px rgba(16, 24, 40, 0.06);
+  --shadow-lift: 0 2px 4px rgba(16, 24, 40, 0.05), 0 16px 40px rgba(79, 70, 229, 0.1);
+  --radius-blob: 1.25rem;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Headline gradient used across hero + section titles */
+.text-gradient {
+  background: linear-gradient(100deg, #4f46e5 0%, #0ea5e9 55%, #10b981 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Soft animated gradient mesh for the hero. Static under reduced motion. */
+.hero-mesh {
+  background:
+    radial-gradient(40rem 28rem at 15% 10%, rgba(79, 70, 229, 0.13), transparent 60%),
+    radial-gradient(36rem 26rem at 85% 15%, rgba(14, 165, 233, 0.12), transparent 60%),
+    radial-gradient(40rem 30rem at 50% 95%, rgba(16, 185, 129, 0.1), transparent 60%);
+}
+
+@keyframes float-orb {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(0, -14px, 0) scale(1.04); }
+}
+.orb {
+  animation: float-orb 9s ease-in-out infinite;
+}
+
+/* Integrations marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 36s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Live ticker */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.ticker-track {
+  animation: ticker 28s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb, .marquee-track, .ticker-track {
+    animation: none;
+  }
+  * {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Focus visibility for keyboard users */
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+  border-radius: 6px;
 }

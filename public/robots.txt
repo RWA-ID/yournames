@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yournames.eth.link/sitemap.xml
