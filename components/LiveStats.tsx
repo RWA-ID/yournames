@@ -44,7 +44,7 @@ export default function LiveStats() {
   }, []);
 
   return (
-    <section aria-label="Live ENS registration stats" className="border-y border-line bg-surface">
+    <section aria-label="Live ENS registration stats" className="cs-band border-y border-line">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 py-10 sm:flex-row sm:justify-center sm:gap-16 sm:px-6">
         <Stat
           label=".eth names registered"

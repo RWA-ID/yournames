@@ -11,19 +11,19 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <>
-      <Header />
+    <div className="cosmos flex min-h-screen flex-col">
+      <Header cosmos />
       <main>
         <Hero />
-        <Pillars />
         <LiveStats />
+        <Pillars />
+        <HowItWorks />
         <Programmability />
         <Integrations />
-        <Sponsors />
-        <HowItWorks />
         <FAQ />
+        <Sponsors />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

@@ -34,7 +34,7 @@ export default function HowItWorks() {
             transition={{ duration: 0.4, delay: i * 0.1 }}
             className="relative rounded-3xl border border-line bg-surface p-6 pt-9 shadow-soft"
           >
-            <span className="absolute -top-5 left-6 flex size-10 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-skyx font-display text-lg font-bold text-white shadow-soft">
+            <span className="absolute -top-5 left-6 flex size-10 items-center justify-center rounded-full bg-gradient-to-br from-[#7c3aed] to-[#627eea] font-display text-lg font-bold text-white shadow-[0_0_22px_rgba(124,58,237,0.5)]">
               {s.n}
             </span>
             <h3 className="font-display text-lg font-bold">{s.title}</h3>

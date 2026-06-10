@@ -23,9 +23,9 @@ createAppKit({
     url: SITE.url,
     icons: [`${SITE.url}/og.png`],
   },
-  themeMode: "light",
+  themeMode: "dark", // matches the cosmos homepage (the modal is opened from there)
   themeVariables: {
-    "--w3m-accent": "#4f46e5",
+    "--w3m-accent": "#7c3aed",
     "--w3m-border-radius-master": "2.5px",
   },
   features: {

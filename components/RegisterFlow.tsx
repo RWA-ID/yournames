@@ -189,7 +189,7 @@ export default function RegisterFlow({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-foreground/40 p-0 backdrop-blur-sm sm:items-center sm:p-6"
+      className="fixed inset-0 z-50 flex items-end justify-center bg-[rgba(5,4,14,0.62)] p-0 backdrop-blur-sm sm:items-center sm:p-6"
       role="dialog"
       aria-modal="true"
       aria-label={`Register ${name}`}
@@ -197,7 +197,7 @@ export default function RegisterFlow({
       <motion.div
         initial={{ y: 40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-t-3xl bg-surface p-6 shadow-lift sm:rounded-3xl sm:p-8"
+        className="max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-t-3xl border border-[rgba(167,139,250,0.3)] bg-[var(--surface-solid)] p-6 shadow-[0_30px_80px_rgba(5,4,14,0.8)] sm:rounded-3xl sm:p-8"
       >
         <div className="mb-5 flex items-start justify-between gap-4">
           <div>
@@ -439,7 +439,7 @@ function Pulse() {
   return (
     <div className="mx-auto flex size-16 items-center justify-center">
       <span className="absolute size-16 animate-ping rounded-full bg-brand/20 motion-reduce:animate-none" />
-      <span className="size-10 rounded-full bg-gradient-to-br from-brand to-skyx" />
+      <span className="size-10 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#627eea] shadow-[0_0_22px_rgba(124,58,237,0.55)]" />
     </div>
   );
 }
@@ -475,7 +475,7 @@ function Countdown({ total, left }: { total: number; left: number }) {
 /** Lightweight CSS confetti (no extra dep); hidden under reduced motion. */
 function Confetti() {
   const pieces = Array.from({ length: 18 });
-  const colors = ["#4f46e5", "#0ea5e9", "#10b981", "#f59e0b", "#f43f5e"];
+  const colors = ["#7c3aed", "#627eea", "#38bdf8", "#2dd4bf", "#a78bfa"];
   return (
     <div aria-hidden className="pointer-events-none relative mx-auto h-10 w-40 motion-reduce:hidden">
       {pieces.map((_, i) => (

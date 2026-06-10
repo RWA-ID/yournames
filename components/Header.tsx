@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useAccount, useEnsName } from "wagmi";
 import { useAppKit } from "@reown/appkit/react";
 import { truncateAddress } from "@/lib/format";
@@ -20,9 +21,26 @@ export function ConnectButton({ className = "" }: { className?: string }) {
   );
 }
 
-export default function Header() {
+export default function Header({ cosmos = false }: { cosmos?: boolean }) {
+  // On the cosmos homepage the header floats transparent over the hero and
+  // turns to dark glass once you scroll. Light pages keep the static glass bar.
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    if (!cosmos) return;
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [cosmos]);
+
+  const chrome = cosmos
+    ? scrolled
+      ? "border-line/70 bg-background/85 backdrop-blur"
+      : "border-transparent bg-transparent"
+    : "border-line/70 bg-background/85 backdrop-blur";
+
   return (
-    <header className="sticky top-0 z-40 border-b border-line/70 bg-background/85 backdrop-blur">
+    <header className={`sticky top-0 z-40 border-b transition-colors duration-300 ${chrome}`}>
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className="font-display text-lg font-bold tracking-tight">
           your<span className="text-gradient">names</span>.eth

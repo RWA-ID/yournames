@@ -52,7 +52,7 @@ export default function Programmability() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.4, delay: (i % 3) * 0.08 }}
-            className="flex gap-4 rounded-3xl border border-line bg-surface p-5 shadow-soft"
+            className="flex h-full gap-4 rounded-3xl border border-line bg-surface p-5 shadow-soft transition hover:-translate-y-[3px] hover:border-[rgba(167,139,250,0.45)] hover:shadow-lift"
           >
             <span className="text-2xl" aria-hidden>
               {u.icon}

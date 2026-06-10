@@ -1,75 +1,75 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 /**
- * "Works everywhere" marquee. Logos must be OFFICIAL brand assets stored in
- * /public/logos/ (see LOGOS_ATTRIBUTION.md). Until a logo file is added, the
- * entry renders as a tasteful text chip — never hotlink brand assets.
+ * "Works everywhere" marquee. Brand logos are served by the Brandfetch Logo
+ * Link CDN (see LOGOS_ATTRIBUTION.md) — if a logo fails to load, the chip
+ * gracefully degrades to the brand name alone.
  */
-type Integration = { name: string; logo: string };
+const BRANDFETCH_CLIENT = "1idCGSZnaFL2hkG7DtD";
+const logoUrl = (domain: string) =>
+  `https://cdn.brandfetch.io/domain/${domain}?c=${BRANDFETCH_CLIENT}`;
+
+type Integration = { name: string; domain: string };
 
 const INTEGRATIONS: Integration[] = [
-  { name: "MetaMask", logo: "/logos/metamask.svg" },
-  { name: "Coinbase Wallet", logo: "/logos/coinbase-wallet.svg" },
-  { name: "Ledger", logo: "/logos/ledger.svg" },
-  { name: "Uniswap", logo: "/logos/uniswap.svg" },
-  { name: "OpenSea", logo: "/logos/opensea.svg" },
-  { name: "Etherscan", logo: "/logos/etherscan.svg" },
-  { name: "Brave", logo: "/logos/brave.svg" },
-  { name: "Farcaster", logo: "/logos/farcaster.svg" },
-  { name: "Base", logo: "/logos/base.svg" },
-  { name: "Rainbow", logo: "/logos/rainbow.svg" },
-  { name: "Trust Wallet", logo: "/logos/trust-wallet.svg" },
-  { name: "GoDaddy", logo: "/logos/godaddy.svg" },
+  { name: "MetaMask", domain: "metamask.io" },
+  { name: "Coinbase Wallet", domain: "coinbase.com" },
+  { name: "Ledger", domain: "ledger.com" },
+  { name: "Uniswap", domain: "uniswap.org" },
+  { name: "OpenSea", domain: "opensea.io" },
+  { name: "Etherscan", domain: "etherscan.io" },
+  { name: "Brave", domain: "brave.com" },
+  { name: "Farcaster", domain: "farcaster.xyz" },
+  { name: "Base", domain: "base.org" },
+  { name: "Rainbow", domain: "rainbow.me" },
+  { name: "Trust Wallet", domain: "trustwallet.com" },
+  { name: "GoDaddy", domain: "godaddy.com" },
 ];
 
 export default function Integrations() {
   return (
-    <section className="border-y border-line bg-surface py-14">
+    <section className="cs-band border-y border-line py-14">
       <h2 className="text-center font-display text-3xl font-bold sm:text-4xl">Works everywhere</h2>
       <p className="mx-auto mt-3 max-w-md px-4 text-center text-sm text-muted">
         These platforms recognize ENS names. We are not affiliated with them.
       </p>
       <div className="marquee mt-8 overflow-hidden" aria-label="Platforms that support ENS">
-        <div className="marquee-track flex w-max items-center gap-10 px-5">
+        <div className="marquee-track flex w-max items-center gap-6 px-3">
           {[...INTEGRATIONS, ...INTEGRATIONS].map((it, i) => (
-            <Logo key={`${it.name}-${i}`} integration={it} ariaHidden={i >= INTEGRATIONS.length} />
+            <Chip key={`${it.name}-${i}`} integration={it} ariaHidden={i >= INTEGRATIONS.length} />
           ))}
         </div>
       </div>
+      <p className="mt-6 text-center text-[11px] text-muted/70">
+        Logos by{" "}
+        <a className="hover:underline" href="https://brandfetch.com" target="_blank" rel="noreferrer">
+          Brandfetch
+        </a>
+      </p>
     </section>
   );
 }
 
-function Logo({ integration, ariaHidden }: { integration: Integration; ariaHidden: boolean }) {
-  const [hasFile, setHasFile] = useState(false);
+function Chip({ integration, ariaHidden }: { integration: Integration; ariaHidden: boolean }) {
+  const [logoOk, setLogoOk] = useState(true);
 
-  useEffect(() => {
-    // Probe once whether the official logo file has been added to /public/logos.
-    fetch(integration.logo, { method: "HEAD" })
-      .then((r) => setHasFile(r.ok))
-      .catch(() => setHasFile(false));
-  }, [integration.logo]);
-
-  if (hasFile) {
-    return (
-      <Image
-        src={integration.logo}
-        alt={ariaHidden ? "" : `${integration.name} logo`}
-        aria-hidden={ariaHidden}
-        width={120}
-        height={36}
-        className="h-9 w-auto opacity-60 grayscale transition hover:opacity-100 hover:grayscale-0"
-      />
-    );
-  }
   return (
     <span
       aria-hidden={ariaHidden}
-      className="rounded-full border border-line px-5 py-2 font-display text-sm font-semibold text-muted transition hover:border-brand hover:text-foreground"
+      className="inline-flex items-center gap-2.5 rounded-full border border-line bg-[rgba(13,11,30,0.55)] py-2 pl-3 pr-5 font-display text-sm font-semibold text-muted transition hover:border-[rgba(167,139,250,0.5)] hover:text-foreground"
     >
+      {logoOk && (
+        // eslint-disable-next-line @next/next/no-img-element -- remote CDN logo, no optimization needed on a static export
+        <img
+          src={logoUrl(integration.domain)}
+          alt={ariaHidden ? "" : `${integration.name} logo`}
+          loading="lazy"
+          className="h-6 w-6 rounded-md object-contain"
+          onError={() => setLogoOk(false)}
+        />
+      )}
       {integration.name}
     </span>
   );

@@ -79,12 +79,12 @@ export default function SearchBar({
   return (
     <div className="mx-auto w-full max-w-xl">
       <div
-        className={`flex items-center gap-2 rounded-2xl border-2 bg-surface p-2 shadow-lift transition ${
+        className={`flex items-center gap-2 rounded-[20px] border-2 bg-[rgba(13,11,30,0.78)] p-2 shadow-[0_10px_40px_rgba(10,9,24,0.6),0_0_30px_rgba(124,58,237,0.18)] backdrop-blur-md transition ${
           result?.available
-            ? "border-mint"
+            ? "border-[rgba(45,212,191,0.7)]"
             : result && !result.available
-              ? "border-rosex/60"
-              : "border-line focus-within:border-brand"
+              ? "border-[rgba(251,113,133,0.65)]"
+              : "border-[rgba(167,139,250,0.32)] focus-within:border-[#627eea] focus-within:shadow-[0_10px_40px_rgba(10,9,24,0.6),0_0_36px_rgba(98,126,234,0.35)]"
         }`}
       >
         <label htmlFor="name-search" className="sr-only">
@@ -117,7 +117,7 @@ export default function SearchBar({
           <p className="px-2 text-sm text-rosex">Couldn&apos;t reach Ethereum — try again in a moment.</p>
         )}
         {result && (
-          <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-line bg-surface px-4 py-3 shadow-soft">
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-line bg-[rgba(17,14,38,0.92)] px-4 py-3 shadow-[0_14px_44px_rgba(10,9,24,0.7)] backdrop-blur">
             <div>
               <p className="font-display text-lg font-semibold">{result.name}</p>
               {result.available ? (

@@ -56,7 +56,7 @@ function PillarCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.45, delay: index * 0.1 }}
-      className="rounded-3xl border border-line bg-surface p-6 shadow-soft transition hover:shadow-lift"
+      className="h-full rounded-3xl border border-line bg-surface p-6 shadow-soft transition hover:-translate-y-[3px] hover:border-[rgba(167,139,250,0.45)] hover:shadow-lift"
     >
       <span className="text-3xl" aria-hidden>
         {pillar.icon}

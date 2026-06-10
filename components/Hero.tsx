@@ -340,7 +340,7 @@ export default function Hero() {
         >
           <span className="inline-flex items-center gap-2 rounded-full border border-[rgba(167,139,250,0.3)] bg-[rgba(17,14,38,0.55)] px-4 py-1.5 text-xs font-semibold text-[#a5a3c2] backdrop-blur">
             <span className="size-1.5 rounded-full bg-[#2dd4bf] shadow-[0_0_10px_#2dd4bf]" /> 0%
-            platform fee — you pay ENS, not us
+            platform fees, forever
           </span>
           <h1 className="mx-auto mt-6 font-display text-[clamp(44px,7vw,92px)] font-extrabold leading-[1.02] tracking-[-0.035em] text-[#f4f4ff] [text-shadow:0_0_70px_rgba(167,139,250,0.4)]">
             Own your name
@@ -352,8 +352,8 @@ export default function Hero() {
           </p>
           <p className="mt-3 text-[clamp(14px,1.3vw,17px)] text-[#a5a3c2]">
             A friendly, independent home for your{" "}
-            <strong className="font-semibold text-[#f4f4ff]">.eth</strong> name. 0% platform fees,
-            forever.
+            <strong className="font-semibold text-[#f4f4ff]">.eth</strong> name — you pay ENS, not
+            us.
           </p>
         </motion.div>
 

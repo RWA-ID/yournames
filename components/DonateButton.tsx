@@ -37,7 +37,7 @@ export default function DonateButton() {
         ♥ Support this site
       </button>
       {openPanel && (
-        <div className="absolute bottom-full right-0 z-30 mb-2 w-72 rounded-2xl border border-line bg-surface p-4 shadow-lift">
+        <div className="absolute bottom-full right-0 z-30 mb-2 w-72 rounded-2xl border border-line bg-[var(--surface-solid)] p-4 shadow-lift">
           <p className="text-sm font-semibold">Donate to {SITE.donate.ensName}</p>
           <p className="mt-1 break-all font-mono text-xs text-muted">{SITE.donate.address}</p>
           <div className="mt-3 flex gap-2">

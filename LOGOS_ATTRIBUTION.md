@@ -1,45 +1,47 @@
 # Logo attribution & sourcing
 
-Per project policy, integration logos shown in the "Works everywhere" marquee must be
-**official brand assets**, downloaded from each brand's press/brand kit and stored locally
-in `/public/logos/` (never hotlinked). Until a file is added, the UI renders the brand
-name as a text chip instead.
+Integration logos shown in the "Works everywhere" marquee are served via the
+**Brandfetch Logo Link CDN** (https://brandfetch.com/developers/logo-api) —
+`https://cdn.brandfetch.io/domain/<domain>?c=<client id>`. Brandfetch sources and
+licenses official brand assets; each logo remains the property of its brand. If a
+logo fails to load, the UI gracefully falls back to a text chip with the brand name.
 
-For each logo added, record below: the exact source URL, the brand guideline URL, and
-the date downloaded. If a brand's guidelines prohibit this usage, OMIT the brand.
+| Brand | Brandfetch domain |
+|---|---|
+| MetaMask | `metamask.io` |
+| Coinbase Wallet | `coinbase.com` |
+| Ledger | `ledger.com` |
+| Uniswap | `uniswap.org` |
+| OpenSea | `opensea.io` |
+| Etherscan | `etherscan.io` |
+| Brave | `brave.com` |
+| Farcaster | `farcaster.xyz` |
+| Base | `base.org` |
+| Rainbow | `rainbow.me` |
+| Trust Wallet | `trustwallet.com` |
+| GoDaddy | `godaddy.com` |
 
-| Brand | File | Asset source | Brand guidelines | Downloaded | Status |
-|---|---|---|---|---|---|
-| MetaMask | `metamask.svg` | https://metamask.io (press kit) | https://metamask.io/brand | — | TODO — not yet added |
-| Coinbase Wallet | `coinbase-wallet.svg` | https://www.coinbase.com/press | https://www.coinbase.com/legal/guidelines | — | TODO — not yet added |
-| Ledger | `ledger.svg` | https://www.ledger.com/press | https://www.ledger.com/press | — | TODO — not yet added |
-| Uniswap | `uniswap.svg` | https://uniswap.org/brand | https://uniswap.org/brand | — | TODO — not yet added |
-| OpenSea | `opensea.svg` | https://opensea.io/brand | https://opensea.io/brand | — | TODO — not yet added |
-| Etherscan | `etherscan.svg` | https://etherscan.io/brandassets | https://etherscan.io/brandassets | — | TODO — not yet added |
-| Brave | `brave.svg` | https://brave.com/brand-assets/ | https://brave.com/brand-assets/ | — | TODO — not yet added |
-| Farcaster | `farcaster.svg` | https://github.com/farcasterxyz (brand) | — | — | TODO — not yet added |
-| Base | `base.svg` | https://base.org (brand kit) | https://base.org | — | TODO — not yet added |
-| Rainbow | `rainbow.svg` | https://rainbow.me | — | — | TODO — not yet added |
-| Trust Wallet | `trust-wallet.svg` | https://trustwallet.com/press | https://trustwallet.com/terms-of-service | — | TODO — not yet added |
-| GoDaddy | `godaddy.svg` | https://aboutus.godaddy.net/newsroom | https://www.godaddy.com/legal | — | TODO — not yet added |
-
-Caption shown in the UI: "These platforms recognize ENS names. We are not affiliated with them."
+Caption shown in the UI: "These platforms recognize ENS names. We are not affiliated
+with them." plus a "Logos by Brandfetch" credit per the Logo Link attribution terms.
 
 ## Hero ribbon chain logos (`/public/logos/chains/`)
 
-Official chain/token marks shown on the capsules riding the Cosmos hero ribbon. Sourced
-from the Trust Wallet Assets repository (community-maintained aggregate of **official**
-brand logos, MIT-licensed repo; each logo remains the property of its brand):
-https://github.com/trustwallet/assets
+Official chain/token marks shown on the capsules riding the Cosmos hero ribbon.
+Polygon/Avalanche/BNB come from the Trust Wallet Assets repository
+(https://github.com/trustwallet/assets, community-maintained aggregate of official
+brand logos, MIT-licensed repo). Ethereum/Bitcoin/Solana were swapped 2026-06-10 to
+the spothq `cryptocurrency-icons` set (https://github.com/spothq/cryptocurrency-icons,
+CC0) — the Trust Wallet variants were dark/black-backed and invisible on the dark
+hero chips; the spothq badges are bright solid-color circles that read at 20 px.
 
-| Chain | File | Asset source (raw path under `blockchains/`) | Downloaded | Status |
+| Chain | File | Asset source | Downloaded | Status |
 |---|---|---|---|---|
-| Ethereum | `chains/ethereum.png` | `ethereum/info/logo.png` | 2026-06-09 | Added |
-| Bitcoin | `chains/bitcoin.png` | `bitcoin/info/logo.png` | 2026-06-09 | Added |
-| Solana | `chains/solana.png` | `solana/info/logo.png` | 2026-06-09 | Added |
-| Polygon | `chains/polygon.png` | `polygon/info/logo.png` | 2026-06-09 | Added |
-| Avalanche | `chains/avalanche.png` | `avalanchec/info/logo.png` | 2026-06-09 | Added |
-| BNB Chain | `chains/bnb.png` | `smartchain/info/logo.png` | 2026-06-09 | Added |
+| Ethereum | `chains/ethereum.png` | spothq `128/color/eth.png` | 2026-06-10 | Added |
+| Bitcoin | `chains/bitcoin.png` | spothq `128/color/btc.png` | 2026-06-10 | Added |
+| Solana | `chains/solana.png` | spothq `128/color/sol.png` | 2026-06-10 | Added |
+| Polygon | `chains/polygon.png` | trustwallet `polygon/info/logo.png` | 2026-06-09 | Added |
+| Avalanche | `chains/avalanche.png` | trustwallet `avalanchec/info/logo.png` | 2026-06-09 | Added |
+| BNB Chain | `chains/bnb.png` | trustwallet `smartchain/info/logo.png` | 2026-06-09 | Added |
 
 Usage is nominative (identifying the chains ENS names interoperate with); logos are shown
 unmodified at small capsule size. We are not affiliated with or endorsed by these brands.
