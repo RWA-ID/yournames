@@ -6,7 +6,7 @@ import DonateButton from "@/components/DonateButton";
 
 export default function Footer() {
   return (
-    <footer className="cs-band mt-auto border-t border-line bg-surface">
+    <footer className="mt-auto border-t border-line bg-surface">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <div className="rounded-3xl border border-line bg-brand-soft/60 p-5">
           <h2 className="font-display text-sm font-bold uppercase tracking-wide">Disclaimer</h2>

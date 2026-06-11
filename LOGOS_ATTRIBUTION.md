@@ -45,3 +45,21 @@ hero chips; the spothq badges are bright solid-color circles that read at 20 px.
 
 Usage is nominative (identifying the chains ENS names interoperate with); logos are shown
 unmodified at small capsule size. We are not affiliated with or endorsed by these brands.
+
+## Vault homepage coin chips (`/public/logos/coins/`)
+
+Round coin marks shown inside the glassy chips of the homepage's "One name. Every
+chain." act (design handoff: vault/Vault Experience.html). All files are stored
+locally so the IPFS build is fully self-contained — never hotlinked.
+
+| Coin | File | Asset source | Downloaded | Status |
+|---|---|---|---|---|
+| Bitcoin | `coins/btc.svg` | spothq `svg/color/btc.svg` (cryptocurrency-icons@0.18.1, CC0) | 2026-06-11 | Added |
+| Ethereum | `coins/eth.svg` | spothq `svg/color/eth.svg` (CC0) | 2026-06-11 | Added |
+| Solana | `coins/sol.png` | solana-labs/token-list wrapped-SOL `logo.png` | 2026-06-11 | Added |
+| Dogecoin | `coins/doge.svg` | spothq `svg/color/doge.svg` (CC0) | 2026-06-11 | Added |
+| Optimism | `coins/op.png` | trustwallet `optimism/info/logo.png` | 2026-06-11 | Added |
+| Polygon (POL) | `coins/pol.svg` | spothq `svg/color/matic.svg` (CC0) | 2026-06-11 | Added |
+
+Usage is nominative (chains a .eth name can hold addresses for); logos are shown
+unmodified inside decorative chips. We are not affiliated with or endorsed by these brands.

@@ -6,6 +6,8 @@ export const SITE = {
     "Register and manage your .eth name — a portable, programmable identity you truly own. Independent community interface, zero platform fees. Not affiliated with ENS.",
   github: "https://github.com/RWA-ID/yournames",
   sponsorEmail: "info@onchain-id.id",
+  builder: "ENS Giant",
+  twitter: { handle: "@ensgianteth", url: "https://x.com/ensgianteth" },
   donate: {
     ensName: "ensgiant.eth",
     address: "0x2D037f66b9e0EDE90c2080558a7d3FF7BE36E9A1" as const,

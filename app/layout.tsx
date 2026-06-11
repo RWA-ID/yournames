@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Sora } from "next/font/google";
+import { Inter, JetBrains_Mono, Sora } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { SITE } from "@/lib/site";
@@ -16,7 +16,13 @@ const sora = Sora({
   display: "swap",
 });
 
-const TITLE = "yournames.eth — Own your name on Ethereum";
+const jbmono = JetBrains_Mono({
+  variable: "--font-jbmono",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const TITLE = "yournames.eth — Unlock Your Onchain Identity";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -65,7 +71,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${sora.variable} h-full antialiased`}>
+    <html lang="en" className={`${inter.variable} ${sora.variable} ${jbmono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <script
           type="application/ld+json"

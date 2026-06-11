@@ -197,7 +197,7 @@ export default function RegisterFlow({
       <motion.div
         initial={{ y: 40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-t-3xl border border-[rgba(167,139,250,0.3)] bg-[var(--surface-solid)] p-6 shadow-[0_30px_80px_rgba(5,4,14,0.8)] sm:rounded-3xl sm:p-8"
+        className="max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-t-3xl border border-line bg-[var(--surface-solid)] p-6 shadow-[0_30px_80px_rgba(5,4,14,0.8)] sm:rounded-3xl sm:p-8"
       >
         <div className="mb-5 flex items-start justify-between gap-4">
           <div>
@@ -439,7 +439,7 @@ function Pulse() {
   return (
     <div className="mx-auto flex size-16 items-center justify-center">
       <span className="absolute size-16 animate-ping rounded-full bg-brand/20 motion-reduce:animate-none" />
-      <span className="size-10 rounded-full bg-gradient-to-br from-[#7c3aed] to-[#627eea] shadow-[0_0_22px_rgba(124,58,237,0.55)]" />
+      <span className="size-10 rounded-full bg-gradient-to-br from-[#f0d9a8] to-[#9a7434] shadow-[0_0_22px_rgba(216,179,106,0.45)]" />
     </div>
   );
 }

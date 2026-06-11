@@ -2,8 +2,10 @@
 
 /*
  * yournames.eth design tokens.
- * Light, warm, trustworthy — Stripe/Rainbow-level polish, zero hacker-dark vibes.
- * Display: Sora (--font-sora). Body: Inter (--font-inter). Set via next/font in layout.
+ * Light, warm, trustworthy theme for /manage (Stripe/Rainbow-level polish).
+ * The homepage wraps everything in `.vault` (dark/gold cinematic theme from the
+ * design handoff's vault/Vault Experience.html) — see the Vault block below.
+ * Display: Sora (--font-sora). Body: Inter (--font-inter). Vault body: JetBrains Mono.
  */
 :root {
   --background: #fdfdfc;
@@ -17,6 +19,8 @@
   --mint: #10b981;
   --rose: #f43f5e;
   --amber: #f59e0b;
+  --gold: #d8b36a;
+  --golddim: #8a6a3a;
 }
 
 @theme inline {
@@ -31,8 +35,11 @@
   --color-mint: var(--mint);
   --color-rosex: var(--rose);
   --color-amberx: var(--amber);
+  --color-gold: var(--gold);
+  --color-golddim: var(--golddim);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-sora), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-jbmono), ui-monospace, monospace;
   --shadow-soft: var(--sh-soft);
   --shadow-lift: var(--sh-lift);
   --radius-blob: 1.25rem;
@@ -51,7 +58,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Headline gradient used across hero + section titles */
+/* Headline gradient used on the light /manage surfaces */
 .text-gradient {
   background: linear-gradient(100deg, #4f46e5 0%, #0ea5e9 55%, #10b981 100%);
   -webkit-background-clip: text;
@@ -60,126 +67,168 @@ body {
 }
 
 /*
- * Cosmos dark theme (design handoff: hero/Cosmos Homepage.html).
- * The homepage wraps everything in `.cosmos`, which re-points the design-token
- * variables; because the Tailwind theme maps colors with `@theme inline`, every
- * bg-surface / border-line / text-muted / shadow-soft utility inside the scope
- * flips to the dark cosmos values automatically. /manage stays light.
+ * ───────────────────────── Vault theme ─────────────────────────
+ * Design handoff: vault/Vault Experience.html. Near-black + gold, JetBrains
+ * Mono body, Sora display. `.vault` re-points the design-token variables, so
+ * every bg-surface / border-line / text-muted / bg-brand utility inside the
+ * scope (including the shared RegisterFlow modal) flips to the dark values.
  */
-.cosmos {
-  --background: #0a0918; /* near-black indigo space */
-  --foreground: #f4f4ff; /* glowing off-white ink */
-  --muted: #a5a3c2;
-  --surface: rgba(255, 255, 255, 0.035); /* glass cards */
-  --line: rgba(167, 139, 250, 0.22);
-  --brand: #7c3aed; /* violet fills */
-  --brand-soft: rgba(124, 58, 237, 0.12);
-  --mint: #2dd4bf; /* teal accent on dark */
-  --sh-soft: 0 4px 22px rgba(10, 9, 24, 0.45);
-  --sh-lift: 0 14px 44px rgba(124, 58, 237, 0.16);
-  --surface-solid: #110e26;
+.vault {
+  --background: #0b0b0c;
+  --foreground: #f2f2f0;
+  --muted: #8a8a90;
+  --surface: #141311; /* "panel" */
+  --line: rgba(216, 179, 106, 0.16); /* gold hairline */
+  --brand: #6366f1;
+  --brand-soft: rgba(99, 102, 241, 0.16);
+  --mint: #34d399;
+  --rose: #f87171;
+  --amber: #fbbf24;
+  --sh-soft: 0 4px 22px rgba(0, 0, 0, 0.5);
+  --sh-lift: 0 14px 44px rgba(216, 179, 106, 0.14);
+  --surface-solid: #141311;
   background: var(--background);
   color: var(--foreground);
-}
-/* Headline/stat gradient + lavender links + gradient fills, cosmos flavor */
-.cosmos .text-gradient {
-  background: linear-gradient(100deg, #a78bfa 0%, #627eea 45%, #38bdf8 75%, #2dd4bf 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.cosmos .text-brand {
-  color: #a78bfa;
-}
-.cosmos .bg-brand {
-  background-image: linear-gradient(135deg, #7c3aed, #627eea);
-  box-shadow: 0 0 24px rgba(124, 58, 237, 0.4);
-}
-/* Raised "band" sections (stats strip, integrations, footer) — dark only in
-   the cosmos scope; shared components fall back to their light bg-surface. */
-.cosmos .cs-band {
-  background: rgba(17, 14, 38, 0.55);
+  font-family: var(--font-jbmono), ui-monospace, monospace;
 }
 /* Kill the white overscroll flash behind the dark homepage */
-html:has(.cosmos) {
-  background: #0a0918;
+html:has(.vault) {
+  background: #0b0b0c;
+}
+.vault ::selection {
+  background: #b08945;
+  color: #0b0b0c;
 }
 
-.cosmos-hero {
-  background: #0a0918;
+/* Gold gradient — wordmark "names", act keywords */
+.gold-grad {
+  background: linear-gradient(100deg, #f0d9a8, #d8b36a 50%, #9a7434);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
-.cosmos-nebula {
-  position: absolute;
+
+/* Hero layers stack in one grid cell (grid + z-index) */
+.hero-grid {
+  display: grid;
+}
+.hero-grid > * {
+  grid-area: 1 / 1;
+}
+
+/* three.js-style particle dial behind the scroll story */
+#dial-canvas {
+  position: fixed;
   inset: 0;
-  background:
-    radial-gradient(1100px 600px at 50% 112%, rgba(124, 58, 237, 0.2), transparent 65%),
-    radial-gradient(800px 460px at 12% -12%, rgba(98, 126, 234, 0.13), transparent 60%),
-    radial-gradient(620px 400px at 90% 12%, rgba(45, 212, 191, 0.06), transparent 60%);
-}
-.cosmos-grad {
-  background: linear-gradient(100deg, #a78bfa 0%, #627eea 45%, #38bdf8 75%, #2dd4bf 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-/* glassy capsules riding the main ribbon (positioned per-frame from the canvas loop) */
-.cchip {
-  position: absolute;
-  left: 0;
-  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
   opacity: 0;
-  display: inline-flex;
+  pointer-events: none;
+}
+
+/* Hero search bar — border color carries the availability state */
+.vsearch {
+  border: 2px solid rgba(242, 242, 240, 0.22);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.vsearch:focus-within {
+  border-color: #d8b36a;
+  box-shadow: 0 0 0 4px rgba(216, 179, 106, 0.16), 0 24px 60px -20px rgba(216, 179, 106, 0.3);
+}
+.vsearch[data-state="available"] { border-color: #34d399; }
+.vsearch[data-state="taken"]     { border-color: #f87171; }
+.vsearch[data-state="invalid"]   { border-color: #fbbf24; }
+.vresult[data-state="available"] { color: #34d399; }
+.vresult[data-state="taken"]     { color: #f87171; }
+.vresult[data-state="invalid"]   { color: #fbbf24; }
+.vresult[data-state="checking"],
+.vresult[data-state="error"]     { color: #a8a8ae; }
+
+/* Hovering feature cards (act 02) */
+.feature-card {
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.45s, border-color 0.45s;
+  will-change: transform;
+}
+.feature-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(216, 179, 106, 0.45);
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.9), 0 18px 50px -24px rgba(216, 179, 106, 0.35);
+}
+.feature-card img {
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.feature-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Glassy floating coin chips (act 01) */
+.coin {
+  position: absolute;
+}
+.coin-inner {
+  position: relative;
+  display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 9px 17px;
-  border-radius: 999px;
-  background: rgba(13, 11, 30, 0.88);
-  border: 1px solid rgba(167, 139, 250, 0.35);
-  color: #d6d2f5;
-  font-size: 15.5px;
-  font-weight: 600;
-  font-family: var(--font-sora), var(--font-inter), ui-sans-serif, sans-serif;
-  white-space: nowrap;
-  box-shadow: 0 4px 22px rgba(10, 9, 24, 0.7), 0 0 16px rgba(124, 58, 237, 0.22);
-  will-change: transform, opacity;
-  transition: box-shadow 0.3s ease;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 32% 28%, rgba(216, 179, 106, 0.22), rgba(20, 17, 12, 0.85) 60%);
+  border: 1px solid rgba(216, 179, 106, 0.35);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(240, 217, 168, 0.25);
+  backdrop-filter: blur(6px);
 }
-.cchip.linked {
-  box-shadow: 0 4px 22px rgba(10, 9, 24, 0.7), 0 0 30px rgba(56, 189, 248, 0.55);
-  border-color: rgba(56, 189, 248, 0.6);
-}
-.cchip .cname {
-  background: linear-gradient(100deg, #a78bfa, #627eea 50%, #38bdf8);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* Integrations marquee */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.marquee-track {
-  animation: marquee 36s linear infinite;
-}
-.marquee:hover .marquee-track {
-  animation-play-state: paused;
+@media (prefers-reduced-motion: no-preference) {
+  .coin-inner {
+    animation: bob var(--bob-dur, 6s) ease-in-out var(--bob-delay, 0s) infinite;
+  }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+  }
+  .cue-dot {
+    animation: cue 1.6s ease-in-out infinite;
+  }
+  @keyframes cue {
+    0%, 100% { transform: translateY(0); opacity: 0.9; }
+    50% { transform: translateY(10px); opacity: 0.3; }
+  }
+  .caret-blink {
+    animation: caretblink 1.1s steps(1) infinite;
+  }
+  @keyframes caretblink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.25; }
+  }
 }
 
-/* Live ticker */
-@keyframes ticker {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+/* FAQ accordion — grid-rows height animation, "+" rotates to "×" */
+.faq-a {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.ticker-track {
-  animation: ticker 28s linear infinite;
+.faq-item.open .faq-a {
+  grid-template-rows: 1fr;
+}
+.faq-a > div {
+  overflow: hidden;
+}
+.faq-plus {
+  transition: transform 0.3s;
+}
+.faq-item.open .faq-plus {
+  transform: rotate(45deg);
+}
+
+/* Empty sponsor slot — dashed gold stripes */
+.slot-stripes {
+  background: repeating-linear-gradient(45deg, rgba(216, 179, 106, 0.06) 0 10px, transparent 10px 20px);
+  border: 1px dashed rgba(216, 179, 106, 0.3);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track, .ticker-track {
-    animation: none;
-  }
   * {
     scroll-behavior: auto !important;
   }
@@ -190,4 +239,7 @@ html:has(.cosmos) {
   outline: 2px solid var(--brand);
   outline-offset: 2px;
   border-radius: 6px;
+}
+.vault :focus-visible {
+  outline-color: var(--gold);
 }

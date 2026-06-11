@@ -14,6 +14,12 @@ sponsor slots (`public/sponsors.json`, contact info@onchain-id.id).
 ## Stack
 
 - Next.js (App Router, `output: 'export'`) + Tailwind v4 + Framer Motion
+- Homepage is the **Vault Experience** (Claude Design handoff, 2026-06-11): dark/gold
+  cinematic page — full-viewport vault-opening video hero with typewriter headline +
+  the live search, GSAP ScrollTrigger + Lenis scroll story (sticky hero, sliding coin
+  chips, pinned horizontal how-it-works), and a 2D-canvas port of the three.js gold
+  particle dial. Code in `components/vault/`, assets in `public/vault/`; `/manage`
+  keeps the light theme.
 - Reown AppKit + wagmi v3 + viem (mainnet only, Alchemy RPC w/ public fallback)
 - Registration: commit/reveal against the **current** ETHRegistrarController
   (`0x59E16fcCd424Cc24e280Be16E11Bcd56fb0CE547`, struct-based `register()`),
