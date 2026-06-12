@@ -109,14 +109,6 @@ html:has(.vault) {
   color: transparent;
 }
 
-/* Hero layers stack in one grid cell (grid + z-index) */
-.hero-grid {
-  display: grid;
-}
-.hero-grid > * {
-  grid-area: 1 / 1;
-}
-
 /* three.js-style particle dial behind the scroll story */
 #dial-canvas {
   position: fixed;
@@ -128,23 +120,92 @@ html:has(.vault) {
   pointer-events: none;
 }
 
-/* Hero search bar — border color carries the availability state */
-.vsearch {
-  border: 2px solid rgba(242, 242, 240, 0.22);
-  transition: border-color 0.3s, box-shadow 0.3s;
+/*
+ * Constellation hero (design handoff: yournames-redesign (1).html).
+ * Scoped chero-* classes: Fraunces serif display, Spline Sans Mono details,
+ * Schibsted Grotesk body, ink/ether/violet palette with the pale-gold accent.
+ */
+.chero-aurora {
+  position: absolute;
+  inset: -20%;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(90px);
+  opacity: 0.55;
+  background:
+    radial-gradient(38% 30% at 18% 22%, rgba(110, 150, 255, 0.22), transparent 70%),
+    radial-gradient(34% 28% at 82% 12%, rgba(139, 108, 255, 0.18), transparent 70%),
+    radial-gradient(40% 34% at 70% 88%, rgba(240, 199, 128, 0.1), transparent 70%);
 }
-.vsearch:focus-within {
-  border-color: #d8b36a;
-  box-shadow: 0 0 0 4px rgba(216, 179, 106, 0.16), 0 24px 60px -20px rgba(216, 179, 106, 0.3);
+.chero-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-.vsearch[data-state="available"] { border-color: #34d399; }
-.vsearch[data-state="taken"]     { border-color: #f87171; }
-.vsearch[data-state="invalid"]   { border-color: #fbbf24; }
-.vresult[data-state="available"] { color: #34d399; }
-.vresult[data-state="taken"]     { color: #f87171; }
-.vresult[data-state="invalid"]   { color: #fbbf24; }
-.vresult[data-state="checking"],
-.vresult[data-state="error"]     { color: #a8a8ae; }
+.chero-display {
+  font-family: var(--font-fraunces), serif;
+  font-variation-settings: "SOFT" 60, "WONK" 0;
+}
+.chero-body {
+  font-family: var(--font-schibsted), system-ui, sans-serif;
+}
+.chero-mono {
+  font-family: var(--font-splinemono), ui-monospace, monospace;
+}
+.chero-eyebrow {
+  font-family: var(--font-splinemono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #9c97b8;
+}
+.chero-eyebrow::before {
+  content: "◆ ";
+  color: #f0c780;
+  font-size: 0.6rem;
+}
+.chero-gradword {
+  background: linear-gradient(110deg, #f0c780 0%, #f4f2ff 45%, #7aa5ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.chero-search {
+  background: linear-gradient(160deg, rgba(13, 11, 31, 0.85), rgba(13, 11, 31, 0.6));
+  border: 1px solid rgba(244, 242, 255, 0.14);
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.8), 0 0 60px -20px rgba(110, 150, 255, 0.25);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.chero-search:focus-within {
+  border-color: rgba(240, 199, 128, 0.5);
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.8), 0 0 70px -16px rgba(240, 199, 128, 0.35);
+}
+.chero-search input {
+  caret-color: #f0c780;
+}
+.chero-search input::placeholder {
+  color: #5e5980;
+}
+.chero-btngold {
+  background: linear-gradient(135deg, #f0c780, #d9a24a);
+  color: #07060f;
+  font-weight: 700;
+  box-shadow: 0 8px 30px -8px rgba(240, 199, 128, 0.45);
+  transition: transform 0.25s, box-shadow 0.25s, filter 0.25s;
+}
+.chero-btngold:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+  box-shadow: 0 14px 40px -10px rgba(240, 199, 128, 0.6);
+}
+.chero-status .ok { color: #9ee6a8; }
+.chero-status .bad { color: #ff9d9d; }
+.chero-status .meh { color: #9c97b8; }
 
 /* Hovering feature cards (act 02) */
 .feature-card {
@@ -187,20 +248,6 @@ html:has(.vault) {
   @keyframes bob {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-14px); }
-  }
-  .cue-dot {
-    animation: cue 1.6s ease-in-out infinite;
-  }
-  @keyframes cue {
-    0%, 100% { transform: translateY(0); opacity: 0.9; }
-    50% { transform: translateY(10px); opacity: 0.3; }
-  }
-  .caret-blink {
-    animation: caretblink 1.1s steps(1) infinite;
-  }
-  @keyframes caretblink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.25; }
   }
 }
 

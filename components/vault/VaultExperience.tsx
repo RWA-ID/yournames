@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import DialCanvas, { vaultDial } from "./DialCanvas";
 import VaultHeader from "./VaultHeader";
-import VaultHero from "./VaultHero";
+import ConstellationHero from "./ConstellationHero";
 import ChainsAct from "./ChainsAct";
 import StatsStrip from "./StatsStrip";
 import FeatureCards from "./FeatureCards";
@@ -17,12 +17,14 @@ import SponsorsDonate from "./SponsorsDonate";
 import VaultFooter from "./VaultFooter";
 
 /*
- * Vault Experience homepage (design handoff: vault/Vault Experience.html).
- * This orchestrator owns everything that spans sections: Lenis smooth scroll,
- * the GSAP ScrollTrigger story (sticky hero exit, coin slide-ins, fade-up
- * entrances, count-up stats, the pinned horizontal act 03) and the gold
- * particle dial's scroll progress. Per-section behavior (hero intro, FAQ,
- * donate) lives in the section components.
+ * Vault Experience homepage (design handoff: vault/Vault Experience.html;
+ * hero replaced 2026-06-12 by the constellation hero from
+ * "yournames-redesign (1).html"). This orchestrator owns everything that
+ * spans sections: Lenis smooth scroll, the GSAP ScrollTrigger story
+ * (constellation parallax-out, coin slide-ins, fade-up entrances, count-up
+ * stats, the pinned horizontal act 03) and the gold particle dial's scroll
+ * progress. Per-section behavior (hero search, FAQ, donate) lives in the
+ * section components.
  */
 export default function VaultExperience() {
   useEffect(() => {
@@ -53,8 +55,6 @@ export default function VaultExperience() {
     document.addEventListener("click", onAnchorClick);
 
     const ctx = gsap.context(() => {
-      const video = document.getElementById("vault-video") as HTMLVideoElement | null;
-
       // particle dial: visible after the hero, progress across the whole story
       ScrollTrigger.create({
         trigger: "#story",
@@ -69,17 +69,13 @@ export default function VaultExperience() {
         },
       });
 
-      // hero slow zoom + UI fade while act 01 slides over the sticky hero
+      // constellation drifts down + dims as the story scrolls over it
       if (!reduced) {
-        gsap.to("#vault-video", {
-          scale: 1.12,
+        gsap.to("#constellation", {
+          yPercent: 18,
+          opacity: 0.25,
           ease: "none",
-          scrollTrigger: { trigger: "#chains", start: "top bottom", end: "top top", scrub: true },
-        });
-        gsap.to("#hero-ui", {
-          opacity: 0,
-          ease: "none",
-          scrollTrigger: { trigger: "#chains", start: "top 90%", end: "top 35%", scrub: true },
+          scrollTrigger: { trigger: "#hero", start: "bottom 90%", end: "bottom 20%", scrub: true },
         });
       }
 
@@ -110,15 +106,6 @@ export default function VaultExperience() {
             ease: "none",
             scrollTrigger: { trigger: "#chains", start: "top 85%", end: "top 10%", scrub: 0.5 },
           });
-        });
-      }
-
-      // pause the vault video once the story covers it
-      if (video) {
-        ScrollTrigger.create({
-          trigger: "#chains",
-          start: "top 30%",
-          onEnter: () => video.pause(),
         });
       }
 
@@ -184,10 +171,10 @@ export default function VaultExperience() {
     <div className="vault flex min-h-screen flex-col antialiased">
       <DialCanvas />
       <VaultHeader home />
-      <VaultHero />
+      <ConstellationHero />
 
-      {/* scroll story — slides over the sticky hero */}
-      <main id="story" className="relative z-20" style={{ marginTop: "-80vh" }}>
+      {/* scroll story */}
+      <main id="story" className="relative z-20">
         <ChainsAct />
         <StatsStrip />
         <FeatureCards />

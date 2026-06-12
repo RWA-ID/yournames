@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Sora } from "next/font/google";
+import {
+  Fraunces,
+  Inter,
+  JetBrains_Mono,
+  Schibsted_Grotesk,
+  Sora,
+  Spline_Sans_Mono,
+} from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { SITE } from "@/lib/site";
@@ -18,6 +25,27 @@ const sora = Sora({
 
 const jbmono = JetBrains_Mono({
   variable: "--font-jbmono",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+// Constellation hero (design: yournames-redesign (1).html)
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  axes: ["SOFT", "WONK", "opsz"],
+  display: "swap",
+});
+
+const schibsted = Schibsted_Grotesk({
+  variable: "--font-schibsted",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const splineMono = Spline_Sans_Mono({
+  variable: "--font-splinemono",
   subsets: ["latin"],
   display: "swap",
 });
@@ -71,7 +99,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${sora.variable} ${jbmono.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${sora.variable} ${jbmono.variable} ${fraunces.variable} ${schibsted.variable} ${splineMono.variable} h-full antialiased`}
+    >
       <body className="min-h-full flex flex-col">
         <script
           type="application/ld+json"
