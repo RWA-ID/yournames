@@ -10,8 +10,11 @@ import { truncateAddress } from "@/lib/format";
  * Vault header — floats transparent over the hero video, gains a dark blurred
  * backdrop + gold hairline once scrolled (so "your" stays legible over the
  * bright gold-mesh act). Wordmark: >_ your·names·.eth in mono extrabold.
+ * `home` switches the section anchors between in-page (#how, smooth via Lenis)
+ * and cross-page (/#how) for the /manage surfaces.
  */
-export default function VaultHeader() {
+export default function VaultHeader({ home = false }: { home?: boolean }) {
+  const prefix = home ? "" : "/";
   const [scrolled, setScrolled] = useState(false);
   const { open } = useAppKit();
   const { address, isConnected } = useAccount();
@@ -39,16 +42,21 @@ export default function VaultHeader() {
         <span className="text-[#8f8878]">.eth</span>
       </Link>
       <nav className="flex items-center gap-3 sm:gap-5" aria-label="Main">
-        <a href="#how" className="hidden text-muted transition-colors hover:text-foreground sm:inline">
+        <a href={`${prefix}#how`} className="hidden text-muted transition-colors hover:text-foreground sm:inline">
           how it works
         </a>
-        <a href="#faq" className="hidden text-muted transition-colors hover:text-foreground sm:inline">
+        <a href={`${prefix}#faq`} className="hidden text-muted transition-colors hover:text-foreground sm:inline">
           questions
         </a>
-        <a href="#sponsors" className="hidden text-gold transition-colors hover:text-foreground sm:inline">
+        <a href={`${prefix}#sponsors`} className="hidden text-gold transition-colors hover:text-foreground sm:inline">
           donate
         </a>
-        <Link href="/manage/" className="text-muted transition-colors hover:text-foreground">
+        <Link
+          href="/manage/"
+          className={`transition-colors hover:text-foreground ${
+            isConnected ? "font-bold text-gold" : "text-muted"
+          }`}
+        >
           my names
         </Link>
         <button

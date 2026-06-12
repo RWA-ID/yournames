@@ -183,7 +183,7 @@ export default function VaultExperience() {
   return (
     <div className="vault flex min-h-screen flex-col antialiased">
       <DialCanvas />
-      <VaultHeader />
+      <VaultHeader home />
       <VaultHero />
 
       {/* scroll story — slides over the sticky hero */}

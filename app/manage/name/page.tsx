@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import VaultHeader from "@/components/vault/VaultHeader";
+import VaultFooter from "@/components/vault/VaultFooter";
 import RecordsEditor from "@/components/manage/RecordsEditor";
 import { getNameState, type NameState } from "@/lib/nameState";
 import { safeNormalize } from "@/lib/normalize";
@@ -15,15 +15,15 @@ import { safeNormalize } from "@/lib/normalize";
  */
 export default function NameDetailPage() {
   return (
-    <>
-      <Header />
-      <main className="mx-auto w-full max-w-4xl flex-1 px-4 py-10 sm:px-6">
+    <div className="vault flex min-h-screen flex-col antialiased">
+      <VaultHeader />
+      <main className="mx-auto w-full max-w-4xl flex-1 px-4 pb-16 pt-28 sm:px-6">
         <Suspense fallback={<Skeleton />}>
           <NameLoader />
         </Suspense>
       </main>
-      <Footer />
-    </>
+      <VaultFooter />
+    </div>
   );
 }
 
@@ -49,7 +49,10 @@ function NameLoader() {
   if (!raw || !name) {
     return (
       <Empty title="Which name?" body="Open a name from your dashboard.">
-        <Link href="/manage/" className="mt-4 inline-block rounded-full bg-brand px-6 py-3 font-semibold text-white">
+        <Link
+          href="/manage/"
+          className="mt-4 inline-block rounded-full bg-brand px-6 py-3 font-semibold"
+        >
           Go to my names
         </Link>
       </Empty>

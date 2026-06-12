@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { gsap } from "gsap";
+import { useAccount, useEnsName } from "wagmi";
 import RegisterFlow from "@/components/RegisterFlow";
+import { truncateAddress } from "@/lib/format";
 import { checkLabel } from "@/lib/normalize";
 import { isAvailable, rentPrice } from "@/lib/registration";
 import { YEAR_SECONDS } from "@/lib/ens";
@@ -14,9 +17,14 @@ import { fmtEth, fmtUsd, fetchEthUsd } from "@/lib/format";
  * sub copy + the real search bar rise up. Skip intro / early scroll / video
  * failure all fast-forward the sequence. Sticky inside the 180vh #hero-wrap so
  * act 01 slides over it, then it scrolls away for good.
+ *
+ * The reveal is capped at INTRO_MAX_MS regardless of the 10s clip (the video
+ * keeps turning behind the scrim) — the search must never be more than a few
+ * seconds away, especially on slow gateway loads where the clip buffers.
  */
 
 const HEADLINE = "Unlock Your Onchain Identity";
+const INTRO_MAX_MS = 1800;
 
 type SearchResult = { label: string; name: string; available: boolean; yearlyWei: bigint };
 type Status =
@@ -59,6 +67,8 @@ export default function VaultHero() {
   const [ethUsd, setEthUsd] = useState<number | null>(null);
   const [registering, setRegistering] = useState<SearchResult | null>(null);
   const seq = useRef(0);
+  const { address, isConnected } = useAccount();
+  const { data: heroEnsName } = useEnsName({ address, chainId: 1 });
 
   useEffect(() => {
     fetchEthUsd().then(setEthUsd);
@@ -113,7 +123,7 @@ export default function VaultHero() {
         if (disposed) return;
         el.textContent = text.slice(0, ++i);
         if (i < text.length) {
-          timers.push(setTimeout(tick, text[i - 1] === " " ? 24 : 38 + Math.random() * 42));
+          timers.push(setTimeout(tick, text[i - 1] === " " ? 16 : 22 + Math.random() * 24));
         } else {
           done();
         }
@@ -141,9 +151,11 @@ export default function VaultHero() {
         return;
       }
 
+      // scrim, gold backdrop and typewriter overlap — the search bar is the
+      // point of the page, it must not hide behind a long cinematic chain
       tl = gsap.timeline();
-      tl.to(scrim, { opacity: 1, duration: 1.1, ease: "power2.inOut" });
-      tl.to(abstract, { opacity: 0.9, duration: 2.4, ease: "power2.inOut" }, "<+=0.5");
+      tl.to(scrim, { opacity: 1, duration: 1.1, ease: "power2.inOut" }, 0);
+      tl.to(abstract, { opacity: 0.9, duration: 2.4, ease: "power2.inOut" }, 0.3);
       tl.add(() => {
         typewriter(typeEl, HEADLINE, () => {
           if (disposed) return;
@@ -152,7 +164,7 @@ export default function VaultHero() {
           gsap.to(cue, { opacity: 1, duration: 0.8, delay: 0.7 });
           caret.classList.add("caret-blink");
         });
-      }, "-=0.35");
+      }, 0.6);
     };
     revealRef.current = reveal;
 
@@ -177,7 +189,7 @@ export default function VaultHero() {
         // start the reveal slightly before the clip ends so it overlaps
         video.addEventListener("timeupdate", onTime);
         video.addEventListener("error", reveal);
-        timers.push(setTimeout(() => reveal(), 12000));
+        timers.push(setTimeout(() => reveal(), INTRO_MAX_MS));
         video.play().catch(reveal);
       }
     } else {
@@ -315,6 +327,16 @@ export default function VaultHero() {
                 </button>
               )}
             </div>
+
+            {isConnected && address && (
+              <p className="mt-4 text-xs text-[#b5b5b2]">
+                connected as{" "}
+                <b className="text-foreground">{heroEnsName ?? truncateAddress(address)}</b> —{" "}
+                <Link href="/manage/" className="text-gold hover:underline">
+                  manage your names →
+                </Link>
+              </p>
+            )}
           </div>
 
           <div

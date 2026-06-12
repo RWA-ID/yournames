@@ -58,14 +58,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Headline gradient used on the light /manage surfaces */
-.text-gradient {
-  background: linear-gradient(100deg, #4f46e5 0%, #0ea5e9 55%, #10b981 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
 /*
  * ───────────────────────── Vault theme ─────────────────────────
  * Design handoff: vault/Vault Experience.html. Near-black + gold, JetBrains
@@ -79,8 +71,8 @@ body {
   --muted: #8a8a90;
   --surface: #141311; /* "panel" */
   --line: rgba(216, 179, 106, 0.16); /* gold hairline */
-  --brand: #6366f1;
-  --brand-soft: rgba(99, 102, 241, 0.16);
+  --brand: #d8b36a; /* primary CTAs go gold in the vault */
+  --brand-soft: rgba(216, 179, 106, 0.12);
   --mint: #34d399;
   --rose: #f87171;
   --amber: #fbbf24;
@@ -98,6 +90,15 @@ html:has(.vault) {
 .vault ::selection {
   background: #b08945;
   color: #0b0b0c;
+}
+/* Gold pills need dark ink: unlayered, so they beat the layered text-white /
+   hover:bg-indigo-700 utilities baked into the shared flows (RegisterFlow,
+   manage editors) without touching every call site. */
+.vault .bg-brand {
+  color: #0b0b0c;
+}
+.vault .hover\:bg-indigo-700:hover {
+  background-color: #e3c27e;
 }
 
 /* Gold gradient — wordmark "names", act keywords */
