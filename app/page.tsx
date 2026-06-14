@@ -1,5 +1,5 @@
-import VaultExperience from "@/components/vault/VaultExperience";
+import HomePage from "@/components/home/HomePage";
 
 export default function Home() {
-  return <VaultExperience />;
+  return <HomePage />;
 }

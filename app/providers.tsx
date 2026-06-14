@@ -23,10 +23,10 @@ createAppKit({
     url: SITE.url,
     icons: [`${SITE.url}/og.png`],
   },
-  themeMode: "dark", // matches the cosmos homepage (the modal is opened from there)
+  themeMode: "light", // matches the light Forest homepage + /manage
   themeVariables: {
-    "--w3m-accent": "#7c3aed",
-    "--w3m-border-radius-master": "2.5px",
+    "--w3m-accent": "#0e9f6e",
+    "--w3m-border-radius-master": "3px",
   },
   features: {
     analytics: false,

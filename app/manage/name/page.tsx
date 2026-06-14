@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import VaultHeader from "@/components/vault/VaultHeader";
-import VaultFooter from "@/components/vault/VaultFooter";
+import Header from "@/components/home/Header";
+import Footer from "@/components/home/Footer";
 import RecordsEditor from "@/components/manage/RecordsEditor";
 import { getNameState, type NameState } from "@/lib/nameState";
 import { safeNormalize } from "@/lib/normalize";
@@ -15,14 +15,14 @@ import { safeNormalize } from "@/lib/normalize";
  */
 export default function NameDetailPage() {
   return (
-    <div className="vault flex min-h-screen flex-col antialiased">
-      <VaultHeader />
-      <main className="mx-auto w-full max-w-4xl flex-1 px-4 pb-16 pt-28 sm:px-6">
+    <div className="flex min-h-screen flex-col">
+      <Header />
+      <main className="mx-auto w-full max-w-4xl flex-1 px-4 pb-16 pt-12 sm:px-6">
         <Suspense fallback={<Skeleton />}>
           <NameLoader />
         </Suspense>
       </main>
-      <VaultFooter />
+      <Footer />
     </div>
   );
 }

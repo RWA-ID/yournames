@@ -1,26 +1,49 @@
 @import "tailwindcss";
 
 /*
- * yournames.eth design tokens.
- * Light, warm, trustworthy theme for /manage (Stripe/Rainbow-level polish).
- * The homepage wraps everything in `.vault` (dark/gold cinematic theme from the
- * design handoff's vault/Vault Experience.html) — see the Vault block below.
- * Display: Sora (--font-sora). Body: Inter (--font-inter). Vault body: JetBrains Mono.
+ * yournames.eth design tokens — light, warm, trustworthy (Stripe/Rainbow-level
+ * polish). Forest (green) theme shipped as the default per the homepage handoff
+ * (design_handoff_yournames_homepage). Display: Sora (--font-sora). Body: Inter
+ * (--font-inter). Mono: JetBrains Mono (--font-jbmono) for addresses.
+ *
+ * The same tokens drive the marketing homepage and the /manage surfaces.
  */
 :root {
-  --background: #fdfdfc;
-  --foreground: #101828;
-  --muted: #667085;
-  --surface: #ffffff;
-  --line: #eaecf0;
-  --brand: #4f46e5; /* indigo-600 */
-  --brand-soft: #eef2ff;
-  --sky: #0ea5e9;
-  --mint: #10b981;
-  --rose: #f43f5e;
-  --amber: #f59e0b;
-  --gold: #d8b36a;
-  --golddim: #8a6a3a;
+  /* base palette — Forest theme overrides applied as default */
+  --background: #fbfdfb; /* warm off-white */
+  --foreground: #101828; /* near-black ink (gray-900) */
+  --muted: #667085; /* secondary text (gray-500) */
+  --surface: #ffffff; /* cards, header, inputs */
+  --line: #eaecf0; /* hairline borders (gray-200) */
+
+  --brand: #0e9f6e; /* forest green — primary buttons, links, focus */
+  --brand-strong: #0b7d57; /* brand fill hover */
+  --brand-soft: #e7f7ef; /* tinted chips/wells */
+
+  --sky: #14b8a6; /* accent */
+  --mint: #22c55e; /* accent + success */
+  --rose: #f43f5e; /* error / "taken" */
+  --amber: #f59e0b; /* warning / invalid input */
+
+  /* signature flourish — used as clipped text on the h1 keyword + wordmark */
+  --gradient-brand: linear-gradient(100deg, #0ea5e9 0%, #10b981 50%, #84cc16 100%);
+  --mesh-hero:
+    radial-gradient(40rem 28rem at 15% 10%, rgba(16, 185, 129, 0.16), transparent 60%),
+    radial-gradient(36rem 26rem at 85% 15%, rgba(20, 184, 166, 0.13), transparent 60%),
+    radial-gradient(40rem 30rem at 50% 95%, rgba(132, 204, 22, 0.12), transparent 60%);
+
+  /* radius + shadow */
+  --radius-sm: 6px;
+  --radius-card: 1.5rem; /* cards, modals, wells */
+  --radius-input: 1rem; /* search bar, step badges */
+  --radius-pill: 9999px;
+  --sh-soft: 0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 24px rgba(16, 24, 40, 0.06);
+  --sh-lift: 0 2px 4px rgba(16, 24, 40, 0.05), 0 16px 40px rgba(16, 185, 129, 0.12);
+  --surface-solid: #ffffff; /* popovers/modals that must not be translucent */
+
+  /* layout */
+  --container-max: 72rem;
+  --header-h: 4rem;
 }
 
 @theme inline {
@@ -30,25 +53,17 @@
   --color-surface: var(--surface);
   --color-line: var(--line);
   --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
   --color-brand-soft: var(--brand-soft);
   --color-skyx: var(--sky);
   --color-mint: var(--mint);
   --color-rosex: var(--rose);
   --color-amberx: var(--amber);
-  --color-gold: var(--gold);
-  --color-golddim: var(--golddim);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-sora), var(--font-inter), ui-sans-serif, sans-serif;
   --font-mono: var(--font-jbmono), ui-monospace, monospace;
   --shadow-soft: var(--sh-soft);
   --shadow-lift: var(--sh-lift);
-  --radius-blob: 1.25rem;
-}
-
-:root {
-  --sh-soft: 0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 24px rgba(16, 24, 40, 0.06);
-  --sh-lift: 0 2px 4px rgba(16, 24, 40, 0.05), 0 16px 40px rgba(79, 70, 229, 0.1);
-  --surface-solid: #ffffff; /* popovers/modals that must not be translucent */
 }
 
 body {
@@ -58,222 +73,85 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/*
- * ───────────────────────── Vault theme ─────────────────────────
- * Design handoff: vault/Vault Experience.html. Near-black + gold, JetBrains
- * Mono body, Sora display. `.vault` re-points the design-token variables, so
- * every bg-surface / border-line / text-muted / bg-brand utility inside the
- * scope (including the shared RegisterFlow modal) flips to the dark values.
- */
-.vault {
-  --background: #0b0b0c;
-  --foreground: #f2f2f0;
-  --muted: #8a8a90;
-  --surface: #141311; /* "panel" */
-  --line: rgba(216, 179, 106, 0.16); /* gold hairline */
-  --brand: #d8b36a; /* primary CTAs go gold in the vault */
-  --brand-soft: rgba(216, 179, 106, 0.12);
-  --mint: #34d399;
-  --rose: #f87171;
-  --amber: #fbbf24;
-  --sh-soft: 0 4px 22px rgba(0, 0, 0, 0.5);
-  --sh-lift: 0 14px 44px rgba(216, 179, 106, 0.14);
-  --surface-solid: #141311;
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-jbmono), ui-monospace, monospace;
-}
-/* Kill the white overscroll flash behind the dark homepage */
-html:has(.vault) {
-  background: #0b0b0c;
-}
-.vault ::selection {
-  background: #b08945;
-  color: #0b0b0c;
-}
-/* Gold pills need dark ink: unlayered, so they beat the layered text-white /
-   hover:bg-indigo-700 utilities baked into the shared flows (RegisterFlow,
-   manage editors) without touching every call site. */
-.vault .bg-brand {
-  color: #0b0b0c;
-}
-.vault .hover\:bg-indigo-700:hover {
-  background-color: #e3c27e;
+section[id] {
+  scroll-margin-top: var(--header-h);
 }
 
-/* Gold gradient — wordmark "names", act keywords */
-.gold-grad {
-  background: linear-gradient(100deg, #f0d9a8, #d8b36a 50%, #9a7434);
+/* Signature gradient, applied as clipped text (h1 keyword, wordmark "names"). */
+.text-gradient {
+  background: var(--gradient-brand);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-/* three.js-style particle dial behind the scroll story */
-#dial-canvas {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  opacity: 0;
-  pointer-events: none;
-}
-
 /*
- * Constellation hero (design handoff: yournames-redesign (1).html).
- * Scoped chero-* classes: Fraunces serif display, Spline Sans Mono details,
- * Schibsted Grotesk body, ink/ether/violet palette with the pale-gold accent.
+ * RegisterFlow + manage editors are shared flows that bake in Tailwind's
+ * built-in `hover:bg-indigo-700`. Re-point it to the brand-strong green here
+ * (unlayered, so it beats the layered utility) instead of editing every site.
  */
-.chero-aurora {
-  position: absolute;
-  inset: -20%;
-  z-index: 0;
-  pointer-events: none;
-  filter: blur(90px);
-  opacity: 0.55;
-  background:
-    radial-gradient(38% 30% at 18% 22%, rgba(110, 150, 255, 0.22), transparent 70%),
-    radial-gradient(34% 28% at 82% 12%, rgba(139, 108, 255, 0.18), transparent 70%),
-    radial-gradient(40% 34% at 70% 88%, rgba(240, 199, 128, 0.1), transparent 70%);
-}
-.chero-grain {
-  position: absolute;
-  inset: 0;
-  z-index: 5;
-  pointer-events: none;
-  opacity: 0.05;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-.chero-display {
-  font-family: var(--font-fraunces), serif;
-  font-variation-settings: "SOFT" 60, "WONK" 0;
-}
-.chero-body {
-  font-family: var(--font-schibsted), system-ui, sans-serif;
-}
-.chero-mono {
-  font-family: var(--font-splinemono), ui-monospace, monospace;
-}
-.chero-eyebrow {
-  font-family: var(--font-splinemono), ui-monospace, monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: #9c97b8;
-}
-.chero-eyebrow::before {
-  content: "◆ ";
-  color: #f0c780;
-  font-size: 0.6rem;
-}
-.chero-gradword {
-  background: linear-gradient(110deg, #f0c780 0%, #f4f2ff 45%, #7aa5ff 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.chero-search {
-  background: linear-gradient(160deg, rgba(13, 11, 31, 0.85), rgba(13, 11, 31, 0.6));
-  border: 1px solid rgba(244, 242, 255, 0.14);
-  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.8), 0 0 60px -20px rgba(110, 150, 255, 0.25);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-}
-.chero-search:focus-within {
-  border-color: rgba(240, 199, 128, 0.5);
-  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.8), 0 0 70px -16px rgba(240, 199, 128, 0.35);
-}
-.chero-search input {
-  caret-color: #f0c780;
-}
-.chero-search input::placeholder {
-  color: #5e5980;
-}
-.chero-btngold {
-  background: linear-gradient(135deg, #f0c780, #d9a24a);
-  color: #07060f;
-  font-weight: 700;
-  box-shadow: 0 8px 30px -8px rgba(240, 199, 128, 0.45);
-  transition: transform 0.25s, box-shadow 0.25s, filter 0.25s;
-}
-.chero-btngold:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.06);
-  box-shadow: 0 14px 40px -10px rgba(240, 199, 128, 0.6);
-}
-.chero-status .ok { color: #9ee6a8; }
-.chero-status .bad { color: #ff9d9d; }
-.chero-status .meh { color: #9c97b8; }
-
-/* Hovering feature cards (act 02) */
-.feature-card {
-  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.45s, border-color 0.45s;
-  will-change: transform;
-}
-.feature-card:hover {
-  transform: translateY(-10px);
-  border-color: rgba(216, 179, 106, 0.45);
-  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.9), 0 18px 50px -24px rgba(216, 179, 106, 0.35);
-}
-.feature-card img {
-  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.feature-card:hover img {
-  transform: scale(1.05);
+.hover\:bg-indigo-700:hover {
+  background-color: var(--brand-strong);
 }
 
-/* Glassy floating coin chips (act 01) */
-.coin {
-  position: absolute;
-}
-.coin-inner {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  border-radius: 9999px;
-  background: radial-gradient(circle at 32% 28%, rgba(216, 179, 106, 0.22), rgba(20, 17, 12, 0.85) 60%);
-  border: 1px solid rgba(216, 179, 106, 0.35);
-  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(240, 217, 168, 0.25);
-  backdrop-filter: blur(6px);
+/* Floating gradient orbs in the hero (9s bob, staggered). */
+@keyframes yn-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .coin-inner {
-    animation: bob var(--bob-dur, 6s) ease-in-out var(--bob-delay, 0s) infinite;
-  }
-  @keyframes bob {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-14px); }
+  .orb {
+    animation: yn-bob var(--bob-dur, 9s) ease-in-out var(--bob-delay, 0s) infinite;
   }
 }
 
-/* FAQ accordion — grid-rows height animation, "+" rotates to "×" */
-.faq-a {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+/* Blinking caret for the phone typewriter. */
+@keyframes yn-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  55%,
+  100% {
+    opacity: 0;
+  }
 }
-.faq-item.open .faq-a {
-  grid-template-rows: 1fr;
-}
-.faq-a > div {
-  overflow: hidden;
-}
-.faq-plus {
-  transition: transform 0.3s;
-}
-.faq-item.open .faq-plus {
-  transform: rotate(45deg);
+.yn-caret {
+  display: inline-block;
+  width: 2px;
+  height: 22px;
+  background: #0a84ff;
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: yn-blink 1s steps(1) infinite;
 }
 
-/* Empty sponsor slot — dashed gold stripes */
-.slot-stripes {
-  background: repeating-linear-gradient(45deg, rgba(216, 179, 106, 0.06) 0 10px, transparent 10px 20px);
-  border: 1px dashed rgba(216, 179, 106, 0.3);
+/* Infinite logo marquee (pause on hover). */
+@keyframes yn-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 0.75rem;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-track {
+    animation: yn-marquee 36s linear infinite;
+  }
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -287,7 +165,4 @@ html:has(.vault) {
   outline: 2px solid var(--brand);
   outline-offset: 2px;
   border-radius: 6px;
-}
-.vault :focus-visible {
-  outline-color: var(--gold);
 }

@@ -439,7 +439,7 @@ function Pulse() {
   return (
     <div className="mx-auto flex size-16 items-center justify-center">
       <span className="absolute size-16 animate-ping rounded-full bg-brand/20 motion-reduce:animate-none" />
-      <span className="size-10 rounded-full bg-gradient-to-br from-[#f0d9a8] to-[#9a7434] shadow-[0_0_22px_rgba(216,179,106,0.45)]" />
+      <span className="size-10 rounded-full bg-gradient-to-br from-[#10b981] to-[#0b7d57] shadow-[0_0_22px_rgba(16,185,129,0.45)]" />
     </div>
   );
 }
@@ -475,7 +475,7 @@ function Countdown({ total, left }: { total: number; left: number }) {
 /** Lightweight CSS confetti (no extra dep); hidden under reduced motion. */
 function Confetti() {
   const pieces = Array.from({ length: 18 });
-  const colors = ["#7c3aed", "#627eea", "#38bdf8", "#2dd4bf", "#a78bfa"];
+  const colors = ["#0ea5e9", "#10b981", "#84cc16", "#22c55e", "#14b8a6"];
   return (
     <div aria-hidden className="pointer-events-none relative mx-auto h-10 w-40 motion-reduce:hidden">
       {pieces.map((_, i) => (
