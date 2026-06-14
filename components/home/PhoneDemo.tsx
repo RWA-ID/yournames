@@ -119,7 +119,7 @@ function PhoneFrame({ phone, isHex }: { phone: Phone; isHex: boolean }) {
 
   return (
     <div
-      className="relative w-full max-w-[620px]"
+      className="relative w-[620px] max-w-full"
       style={{ aspectRatio: "1024 / 1536", filter: "drop-shadow(0 30px 50px rgba(16,24,40,0.22))" }}
     >
       {/* live screen */}
