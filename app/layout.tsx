@@ -73,8 +73,20 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${inter.variable} ${sora.variable} ${jbmono.variable} h-full antialiased`}
     >
+      <head>
+        {/*
+         * Apply the saved (or system) theme before first paint to avoid a
+         * light→dark flash. Mirrors the localStorage key used by ThemeToggle.
+         */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("yn-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.classList.add("dark")}}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         <script
           type="application/ld+json"

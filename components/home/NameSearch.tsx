@@ -5,6 +5,7 @@ import { checkLabel } from "@/lib/normalize";
 import { isAvailable, rentPrice } from "@/lib/registration";
 import { YEAR_SECONDS } from "@/lib/ens";
 import { fmtEth, fmtUsd, fetchEthUsd } from "@/lib/format";
+import SecondaryMarket from "./SecondaryMarket";
 
 /*
  * The core interaction: a large `.eth` search input with debounced availability
@@ -152,10 +153,14 @@ export default function NameSearch({
           ) : (
             <span>
               <strong className={onGradient ? "text-white" : "text-rosex"}>{result.name} is taken.</strong>{" "}
-              Try another — every name is one keystroke away.
+              Try another — or pick it up on the secondary market below.
             </span>
           ))}
       </div>
+
+      {result && !result.available && (
+        <SecondaryMarket name={result.name} ethUsd={ethUsd} />
+      )}
     </div>
   );
 }

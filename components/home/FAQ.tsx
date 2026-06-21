@@ -39,7 +39,8 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="mx-auto max-w-3xl px-6 py-20">
+    <section id="faq" className="border-y border-line bg-tint">
+      <div className="mx-auto max-w-3xl px-6 py-20">
       <Reveal>
         <h2
           className="mb-10 text-center font-display font-bold"
@@ -82,6 +83,7 @@ export default function FAQ() {
           })}
         </div>
       </Reveal>
+      </div>
     </section>
   );
 }

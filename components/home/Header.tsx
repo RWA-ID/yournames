@@ -5,6 +5,7 @@ import { useAccount, useEnsName } from "wagmi";
 import { useAppKit } from "@reown/appkit/react";
 import { truncateAddress } from "@/lib/format";
 import Wordmark from "./Wordmark";
+import ThemeToggle from "./ThemeToggle";
 
 /*
  * Sticky site header — translucent blur over the page, hairline bottom border.
@@ -25,14 +26,15 @@ export default function Header({ home = false }: { home?: boolean }) {
   return (
     <header
       className="sticky top-0 z-40 border-b border-line"
-      style={{ background: "rgba(251,253,251,0.82)", backdropFilter: "blur(14px)" }}
+      style={{ background: "var(--header-bg)", backdropFilter: "blur(14px)" }}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-6">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-2 px-4 sm:gap-4 sm:px-6">
         <Link href={home ? "#top" : "/"} className="inline-flex items-center" aria-label="yournames.eth home">
           <Wordmark />
         </Link>
 
         <nav className="flex items-center gap-1" aria-label="Main">
+          <ThemeToggle />
           <a href={`${prefix}#people`} className={`hidden sm:inline-flex ${navLink}`}>
             For people
           </a>

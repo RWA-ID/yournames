@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Class-based dark mode (ThemeToggle flips `.dark` on <html>), not media-query. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /*
  * yournames.eth design tokens — light, warm, trustworthy (Stripe/Rainbow-level
  * polish). Forest (green) theme shipped as the default per the homepage handoff
@@ -14,6 +17,8 @@
   --foreground: #101828; /* near-black ink (gray-900) */
   --muted: #667085; /* secondary text (gray-500) */
   --surface: #ffffff; /* cards, header, inputs */
+  --tint: #f1f7f3; /* faint green well — fills "empty" full-bleed sections */
+  --header-bg: rgba(251, 253, 251, 0.82); /* translucent sticky header */
   --line: #eaecf0; /* hairline borders (gray-200) */
 
   --brand: #0e9f6e; /* forest green — primary buttons, links, focus */
@@ -44,6 +49,43 @@
   /* layout */
   --container-max: 72rem;
   --header-h: 4rem;
+  color-scheme: light;
+}
+
+/*
+ * Dark "Deep Forest" theme. Opt-in via `html.dark` (toggled by ThemeToggle,
+ * persisted in localStorage, applied pre-paint by the inline script in layout).
+ * Every surface is a token, so overriding the variables here recolors the whole
+ * site — marketing homepage and /manage alike — with no per-component edits.
+ */
+html.dark {
+  --background: #0a1310;
+  --foreground: #e7ede9;
+  --muted: #93a39b;
+  --surface: #10201a;
+  --tint: #0d1a15;
+  --header-bg: rgba(10, 19, 16, 0.82);
+  --line: #1f3329;
+
+  --brand: #2dd4a0;
+  --brand-strong: #34e0ab;
+  --brand-soft: #112c22;
+
+  --sky: #2dd4bf;
+  --mint: #34d399;
+  --rose: #fb7185;
+  --amber: #fbbf24;
+
+  --gradient-brand: linear-gradient(100deg, #22d3ee 0%, #34d399 50%, #a3e635 100%);
+  --mesh-hero:
+    radial-gradient(40rem 28rem at 15% 10%, rgba(45, 212, 160, 0.13), transparent 60%),
+    radial-gradient(36rem 26rem at 85% 15%, rgba(45, 212, 191, 0.1), transparent 60%),
+    radial-gradient(40rem 30rem at 50% 95%, rgba(163, 230, 53, 0.08), transparent 60%);
+
+  --sh-soft: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+  --sh-lift: 0 2px 4px rgba(0, 0, 0, 0.35), 0 16px 40px rgba(0, 0, 0, 0.45);
+  --surface-solid: #10201a;
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -51,6 +93,7 @@
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-surface: var(--surface);
+  --color-tint: var(--tint);
   --color-line: var(--line);
   --color-brand: var(--brand);
   --color-brand-strong: var(--brand-strong);

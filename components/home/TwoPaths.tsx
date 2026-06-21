@@ -28,7 +28,7 @@ export default function TwoPaths() {
             style={{
               borderRadius: "var(--radius-card)",
               border: "1px solid rgba(99,102,241,0.28)",
-              background: "linear-gradient(180deg,#f4f4ff,var(--surface) 60%)",
+              background: "linear-gradient(180deg,rgba(99,102,241,0.07),var(--surface) 60%)",
               boxShadow: "var(--shadow-soft)",
             }}
           >
@@ -77,7 +77,7 @@ export default function TwoPaths() {
             style={{
               borderRadius: "var(--radius-card)",
               border: "1px solid rgba(245,158,11,0.3)",
-              background: "linear-gradient(180deg,#fff8ef,var(--surface) 60%)",
+              background: "linear-gradient(180deg,rgba(245,158,11,0.08),var(--surface) 60%)",
               boxShadow: "var(--shadow-soft)",
             }}
           >

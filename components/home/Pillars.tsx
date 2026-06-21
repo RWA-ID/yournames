@@ -41,7 +41,8 @@ export default function Pillars() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="mx-auto max-w-6xl px-6 pb-20 pt-16">
+    <section className="border-y border-line bg-tint">
+      <div className="mx-auto max-w-6xl px-6 pb-20 pt-16">
       <Reveal>
         <h2
           className="text-center font-display font-bold"
@@ -78,6 +79,7 @@ export default function Pillars() {
             </div>
           </Reveal>
         ))}
+      </div>
       </div>
     </section>
   );
