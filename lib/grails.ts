@@ -18,7 +18,7 @@ const isEthCurrency = (addr?: string | null) =>
 
 /** Canonical Grails name page (buy / make-offer / view) — opens in a new tab. */
 export function grailsNameUrl(name: string): string {
-  return `https://grails.app/name/${encodeURIComponent(name)}`;
+  return `https://grails.app/${encodeURIComponent(name)}`;
 }
 
 export type GrailsResale = {
