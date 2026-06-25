@@ -13,22 +13,25 @@ import Wordmark from "./Wordmark";
 export default function Footer({ home = false }: { home?: boolean }) {
   const prefix = home ? "" : "/";
   const [copied, setCopied] = useState(false);
+  const [mailCopied, setMailCopied] = useState(false);
   const addr = SITE.donate.address;
   const short = `${addr.slice(0, 6)}…${addr.slice(-4)}`;
 
-  const copy = () => {
+  /* Copy `text` to the clipboard, flashing `flash(true)` then `flash(false)`. */
+  const copyText = (text: string, flash: (v: boolean) => void) => {
     const done = () => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1800);
+      flash(true);
+      setTimeout(() => flash(false), 1800);
     };
     try {
-      const p = navigator.clipboard?.writeText(addr);
-      if (p?.then) p.then(done).catch(() => fallbackCopy(addr, done));
+      const p = navigator.clipboard?.writeText(text);
+      if (p?.then) p.then(done).catch(() => fallbackCopy(text, done));
       else done();
     } catch {
-      fallbackCopy(addr, done);
+      fallbackCopy(text, done);
     }
   };
+  const copy = () => copyText(addr, setCopied);
 
   const col = "text-sm text-foreground transition hover:text-brand";
 
@@ -77,9 +80,28 @@ export default function Footer({ home = false }: { home?: boolean }) {
             <a href={SITE.github} target="_blank" rel="noreferrer" className={col}>
               GitHub
             </a>
-            <a href={`mailto:${SITE.sponsorEmail}`} className={col}>
+            {/*
+             * Sponsor contact. `mailto:` still opens a mail app where one is
+             * registered (typical on phones), but on a desktop with no mail
+             * client a bare mailto silently does nothing — so we also copy the
+             * address to the clipboard on click and show it inline, so the link
+             * does something visible everywhere.
+             */}
+            <a
+              href={`mailto:${SITE.sponsorEmail}`}
+              onClick={() => copyText(SITE.sponsorEmail, setMailCopied)}
+              className={col}
+            >
               Become a sponsor →
             </a>
+            <button
+              type="button"
+              onClick={() => copyText(SITE.sponsorEmail, setMailCopied)}
+              className="text-left font-mono text-[12px] text-muted transition hover:text-brand"
+              title="Click to copy"
+            >
+              {mailCopied ? "Copied ✓" : SITE.sponsorEmail}
+            </button>
           </div>
         </div>
       </div>

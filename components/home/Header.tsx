@@ -70,7 +70,7 @@ export default function Header({ home = false }: { home?: boolean }) {
               onClick={() => open()}
               className="inline-flex items-center rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-brand-strong active:scale-[0.98]"
             >
-              Connect wallet
+              Connect<span className="hidden sm:inline">&nbsp;wallet</span>
             </button>
           )}
         </nav>

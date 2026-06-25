@@ -114,6 +114,12 @@ body {
   color: var(--foreground);
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  /*
+   * Guard against accidental horizontal scroll on phones (a too-wide element
+   * would otherwise let the whole page rubber-band sideways). `clip` — not
+   * `hidden` — so it doesn't create a scroll container or break the sticky header.
+   */
+  overflow-x: clip;
 }
 
 section[id] {

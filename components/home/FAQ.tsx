@@ -40,7 +40,7 @@ export default function FAQ() {
 
   return (
     <section id="faq" className="border-y border-line bg-tint">
-      <div className="mx-auto max-w-3xl px-6 py-20">
+      <div className="mx-auto max-w-3xl px-6 py-14 sm:py-20">
       <Reveal>
         <h2
           className="mb-10 text-center font-display font-bold"

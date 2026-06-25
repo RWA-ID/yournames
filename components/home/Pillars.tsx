@@ -42,7 +42,7 @@ export default function Pillars() {
 
   return (
     <section className="border-y border-line bg-tint">
-      <div className="mx-auto max-w-6xl px-6 pb-20 pt-16">
+      <div className="mx-auto max-w-6xl px-6 pb-14 pt-12 sm:pb-20 sm:pt-16">
       <Reveal>
         <h2
           className="text-center font-display font-bold"

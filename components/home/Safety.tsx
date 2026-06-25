@@ -26,7 +26,7 @@ const CARDS = [
 export default function Safety() {
   return (
     <section id="safety" className="border-y border-line bg-brand-soft">
-      <div className="mx-auto max-w-6xl px-6 py-20">
+      <div className="mx-auto max-w-6xl px-6 py-14 sm:py-20">
         <Reveal className="mx-auto max-w-xl text-center">
           <p className="text-[13px] font-bold uppercase tracking-wider text-brand">Why it&apos;s safe</p>
           <h2

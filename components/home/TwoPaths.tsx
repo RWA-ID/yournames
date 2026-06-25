@@ -6,7 +6,7 @@ import Reveal from "./Reveal";
  */
 export default function TwoPaths() {
   return (
-    <section className="mx-auto max-w-6xl px-6 pb-4 pt-20">
+    <section className="mx-auto max-w-6xl px-6 pb-4 pt-14 sm:pt-20">
       <Reveal>
         <h2
           className="text-center font-display font-bold"

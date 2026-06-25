@@ -7,10 +7,10 @@ import Reveal from "./Reveal";
  */
 export default function FinalCTA({ onRegister }: { onRegister: (label: string) => void }) {
   return (
-    <section className="mx-auto max-w-6xl px-6 pb-20">
+    <section className="mx-auto max-w-6xl px-6 pb-14 sm:pb-20">
       <Reveal>
         <div
-          className="relative overflow-hidden px-6 py-16 text-center"
+          className="relative overflow-hidden px-6 py-12 text-center sm:py-16"
           style={{ borderRadius: "var(--radius-card)", background: "var(--gradient-brand)", boxShadow: "var(--shadow-lift)" }}
         >
           <h2

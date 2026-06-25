@@ -20,7 +20,7 @@ const BRANDFETCH = "?c=1idCGSZnaFL2hkG7DtD";
 export default function EveryChain() {
   return (
     <section className="border-y border-line bg-surface">
-      <div className="mx-auto max-w-6xl px-6 py-20">
+      <div className="mx-auto max-w-6xl px-6 py-14 sm:py-20">
         <Reveal className="mx-auto max-w-xl text-center">
           <p className="text-[13px] font-bold uppercase tracking-wider text-brand">One name, every chain</p>
           <h2

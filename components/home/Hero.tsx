@@ -38,7 +38,7 @@ export default function Hero({ onRegister }: { onRegister: (label: string) => vo
         }}
       />
 
-      <div className="relative mx-auto max-w-3xl px-6 pb-22 pt-18 text-center sm:pb-24 sm:pt-20">
+      <div className="relative mx-auto max-w-3xl px-6 pb-16 pt-12 text-center sm:pb-24 sm:pt-20">
         <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1.5 text-sm font-medium text-foreground shadow-soft">
           <span className="size-1.5 rounded-full bg-mint" aria-hidden="true" />
           0% platform fee — you pay ENS, not us

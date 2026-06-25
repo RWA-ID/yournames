@@ -18,7 +18,7 @@ const USES = [
 export default function UseCases() {
   return (
     <section className="border-y border-line bg-surface">
-      <div className="mx-auto max-w-6xl px-6 py-20">
+      <div className="mx-auto max-w-6xl px-6 py-14 sm:py-20">
         <Reveal>
           <h2
             className="text-center font-display font-bold"
