@@ -23,10 +23,12 @@ createAppKit({
     url: SITE.url,
     icons: [`${SITE.url}/og.png`],
   },
-  themeMode: "light", // matches the light Forest homepage + /manage
+  themeMode: "dark", // matches the Dark Ledger theme (site is always dark)
   themeVariables: {
-    "--w3m-accent": "#0e9f6e",
-    "--w3m-border-radius-master": "3px",
+    "--w3m-accent": "#f4f3ef", // paper — primary action color of the theme
+    "--w3m-color-mix": "#131318", // pull the modal toward our ink background
+    "--w3m-color-mix-strength": 15,
+    "--w3m-border-radius-master": "2px", // crisp corners, not pills
   },
   features: {
     analytics: false,

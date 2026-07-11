@@ -16,7 +16,7 @@ export default function FinalCTA({ onCheck }: { onCheck: (value: string) => void
       <div className="mx-auto w-full max-w-[44rem] px-6 py-14 text-center sm:py-20">
         <Reveal>
           <h2 className="font-display text-[1.9rem] font-bold tracking-[-0.02em] text-foreground sm:text-[2.5rem]">
-            The name you want is <span className="editorial">still free — for now.</span>
+            The name you want is <span className="editorial">still available — for now.</span>
           </h2>
           <form
             onSubmit={(e) => {

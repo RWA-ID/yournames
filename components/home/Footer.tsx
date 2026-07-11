@@ -41,6 +41,9 @@ export default function Footer() {
             <Link href="/manage/" className={link}>
               My names
             </Link>
+            <Link href="/faq/" className={link}>
+              FAQ
+            </Link>
             <a href={SITE.github} target="_blank" rel="noreferrer" className={link}>
               GitHub
             </a>

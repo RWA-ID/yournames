@@ -6,6 +6,8 @@ import Header from "./Header";
 import Hero from "./Hero";
 import NameTicker from "./NameTicker";
 import Replaces from "./Replaces";
+import Wallets from "./Wallets";
+import Chains from "./Chains";
 import ForCompanies from "./ForCompanies";
 import StatsBand from "./StatsBand";
 import FinalCTA from "./FinalCTA";
@@ -29,6 +31,8 @@ export default function HomePage() {
         <Hero onRegister={setRegistering} seed={seed} />
         <NameTicker />
         <Replaces />
+        <Wallets />
+        <Chains />
         <ForCompanies />
         <StatsBand />
         <FinalCTA

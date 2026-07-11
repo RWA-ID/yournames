@@ -1,5 +1,33 @@
 # Logo attribution & sourcing
 
+## Wallet / app marks (`/public/logos/wallets/`) — "Works everywhere" section
+
+Brand symbols shown in the homepage Wallets section and the ENS mark used in the
+multi-chain card. Downloaded 2026-07-11 and stored locally so the IPFS build stays
+self-contained — never hotlinked. Most come from the **Brandfetch Logo Link CDN**
+(`https://cdn.brandfetch.io/<domain>/symbol?c=<client id>`), which sources and
+licenses official brand assets; each logo remains the property of its brand.
+
+| Brand | File | Source | Status |
+|---|---|---|---|
+| MetaMask | `wallets/metamask.webp` | Brandfetch `metamask.io/symbol` | Added |
+| Trust Wallet | `wallets/trust.png` | Official gradient shield supplied by Hector 2026-07-11; white JPEG bg keyed to transparent (scratchpad `dewhite.mjs`) | Added |
+| Coinbase Wallet | `wallets/coinbase.png` | Official blue-tile "C" mark supplied by Hector 2026-07-11; shown with CSS-rounded corners | Added |
+| Phantom | `wallets/phantom.webp` | Brandfetch `phantom.com/symbol` (shown on brand-lavender chip — the ink ghost vanishes on our dark bg) | Added |
+| Uniswap | `wallets/uniswap.webp` | Brandfetch `uniswap.org/symbol` | Added |
+| Rainbow | `wallets/rainbow.webp` | Brandfetch `rainbow.me/symbol` (own baked bg, rounded in CSS) | Added |
+| PayPal | `wallets/paypal.webp` | Brandfetch `paypal.com/symbol` | Added |
+| ENS | `wallets/ens.png` | Official blue-tile mark supplied by Hector 2026-07-11 (JPEG → PNG); shown with CSS-rounded corners | Added |
+
+Brandfetch fallback gotcha (for future additions): unknown domain/variant combos
+return a Brandfetch "B" placeholder with HTTP 200 — verify by md5 (identical bytes
+across domains = fallback) and visually before shipping. `theme/dark` means a
+dark-*colored* logo (for light pages), `theme/light` a white one; several brands
+have no `symbol` asset at all.
+
+Caption shown in the UI: logos identify third-party products that resolve ENS names;
+trademarks belong to their owners, no affiliation or endorsement implied.
+
 Integration logos shown in the "Works everywhere" marquee are served via the
 **Brandfetch Logo Link CDN** (https://brandfetch.com/developers/logo-api) —
 `https://cdn.brandfetch.io/domain/<domain>?c=<client id>`. Brandfetch sources and
@@ -60,6 +88,7 @@ locally so the IPFS build is fully self-contained — never hotlinked.
 | Dogecoin | `coins/doge.svg` | spothq `svg/color/doge.svg` (CC0) | 2026-06-11 | Added |
 | Optimism | `coins/op.png` | trustwallet `optimism/info/logo.png` | 2026-06-11 | Added |
 | Polygon (POL) | `coins/pol.svg` | spothq `svg/color/matic.svg` (CC0) | 2026-06-11 | Added |
+| USDC | `coins/usdc.svg` | spothq `svg/color/usdc.svg` (cryptocurrency-icons@0.18.1, CC0) | 2026-07-11 | Added |
 
 Usage is nominative (chains a .eth name can hold addresses for); logos are shown
 unmodified inside decorative chips. We are not affiliated with or endorsed by these brands.

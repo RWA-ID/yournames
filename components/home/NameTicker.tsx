@@ -1,32 +1,72 @@
+import { grailsNameUrl } from "@/lib/grails";
+
 /*
- * Name ticker — infinite hairline-bound marquee of example registrations
- * (32s loop, pause on hover, hidden entirely under prefers-reduced-motion —
- * see .marquee in globals.css).
+ * Premium-name ticker — infinite hairline-bound marquee of real premium names
+ * taking offers on the secondary market. Each name deep-links to its Grails
+ * page, where offers can be made. (Pause on hover, hidden entirely under
+ * prefers-reduced-motion — see .marquee in globals.css; duration scales with
+ * the longer list via the inline animationDuration.)
  */
-const ITEMS: Array<[name: string, note: string]> = [
-  ["nordbank.eth", "brand protected"],
-  ["maria.eth", "registered today"],
-  ["meridian.eth", "subnames issued to 40 staff"],
-  ["kenji.eth", "paid by name via PayPal"],
-  ["atelier.eth", "site live at atelier.eth.link"],
+const NAMES = [
+  "slop.eth",
+  "philosophy.eth",
+  "group.eth",
+  "files.eth",
+  "sent.eth",
+  "downtown.eth",
+  "supercomputer.eth",
+  "ten.eth",
+  "size.eth",
+  "hour.eth",
+  "backend.eth",
+  "money.eth",
+  "fund.eth",
+  "tax.eth",
+  "legal.eth",
+  "forex.eth",
+  "charge.eth",
+  "escrow.eth",
+  "mba.eth",
+  "goldtreasury.eth",
+  "cryptotreasury.eth",
+  "digitaltreasury.eth",
+  "middleeast.eth",
+  "muslims.eth",
+  "theaters.eth",
+  "ethereumagent.eth",
+  "diamond.eth",
+  "cargo.eth",
+  "penthouses.eth",
 ];
 
 export default function NameTicker() {
   const row = (hidden: boolean) => (
     <div className="flex items-center gap-12" aria-hidden={hidden || undefined}>
-      {ITEMS.map(([name, note]) => (
-        <span key={name} className="whitespace-nowrap text-[0.8125rem] font-semibold text-foreground">
-          {name} <span className="font-normal text-foreground/45">— {note}</span>
-        </span>
+      {NAMES.map((name) => (
+        <a
+          key={name}
+          href={grailsNameUrl(name)}
+          target="_blank"
+          rel="noopener noreferrer"
+          tabIndex={hidden ? -1 : undefined}
+          className="whitespace-nowrap text-[0.8125rem] font-semibold text-foreground transition hover:text-white"
+        >
+          {name} <span className="font-normal text-foreground/45">— offers open</span>
+        </a>
       ))}
     </div>
   );
 
   return (
-    <div className="marquee overflow-hidden border-y border-line py-[0.85rem]">
-      <div className="marquee-track">
-        {row(false)}
-        {row(true)}
+    <div className="border-y border-line">
+      <p className="eyebrow pt-3.5 text-center">
+        Premium names · taking offers on the secondary market
+      </p>
+      <div className="marquee overflow-hidden py-[0.85rem]">
+        <div className="marquee-track" style={{ animationDuration: "160s" }}>
+          {row(false)}
+          {row(true)}
+        </div>
       </div>
     </div>
   );

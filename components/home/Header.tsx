@@ -46,6 +46,9 @@ export default function Header({ home = false }: { home?: boolean }) {
               </a>
             </>
           )}
+          <Link href="/faq/" className={`hidden sm:inline ${navLink}`}>
+            FAQ
+          </Link>
           <Link href="/manage/" className={`hidden sm:inline ${navLink}`}>
             My names
           </Link>
