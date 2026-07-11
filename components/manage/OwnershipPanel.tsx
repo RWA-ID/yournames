@@ -323,7 +323,7 @@ function ConfirmModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/40 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(9,9,12,0.66)] p-4 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
       aria-label={title}

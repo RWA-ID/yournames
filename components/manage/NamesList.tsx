@@ -43,7 +43,7 @@ export default function NamesList() {
   if (!isConnected) {
     return (
       <div className="mt-10 rounded-3xl border border-line bg-surface p-10 text-center shadow-soft">
-        <p className="text-4xl" aria-hidden>👋</p>
+        <p className="eyebrow" aria-hidden>Your names</p>
         <p className="mt-3 font-display text-xl font-bold">Connect to see your names</p>
         <p className="mx-auto mt-1 max-w-sm text-sm text-muted">
           We&apos;ll list every ENS name your wallet owns or manages.
@@ -83,7 +83,7 @@ export default function NamesList() {
   if (names.length === 0) {
     return (
       <div className="mt-10 rounded-3xl border border-line bg-surface p-10 text-center shadow-soft">
-        <p className="text-4xl" aria-hidden>✨</p>
+        <p className="eyebrow" aria-hidden>Registry check</p>
         <p className="mt-3 font-display text-xl font-bold">No names yet — let&apos;s fix that</p>
         <p className="mx-auto mt-1 max-w-sm text-sm text-muted">
           Your perfect .eth name might still be available.

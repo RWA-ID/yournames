@@ -63,7 +63,7 @@ export default function RenewModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/40 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(9,9,12,0.66)] p-4 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
       aria-label={`Renew ${name}`}
@@ -132,7 +132,9 @@ export default function RenewModal({
         )}
         {phase === "done" && (
           <div className="py-6 text-center">
-            <p className="font-display text-xl font-bold">Extended 🎉</p>
+            <p className="font-display text-xl font-bold">
+              Extended <span className="text-mint">✓</span>
+            </p>
             <p className="mt-1 text-sm text-muted">
               {name} is yours for {years} more {years === 1 ? "year" : "years"}.
             </p>

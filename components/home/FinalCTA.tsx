@@ -1,32 +1,60 @@
-import NameSearch from "./NameSearch";
+"use client";
+
+import { useState } from "react";
 import Reveal from "./Reveal";
 
 /*
- * Final CTA — a full-width gradient card with white headline + subcopy and one
- * more NameSearch.
+ * Final CTA — centered editorial headline and an attached search bar.
+ * "Check now" seeds the hero Registry-check card (the single live lookup)
+ * and scrolls back up to it.
  */
-export default function FinalCTA({ onRegister }: { onRegister: (label: string) => void }) {
+export default function FinalCTA({ onCheck }: { onCheck: (value: string) => void }) {
+  const [value, setValue] = useState("");
+
   return (
-    <section className="mx-auto max-w-6xl px-6 pb-14 sm:pb-20">
-      <Reveal>
-        <div
-          className="relative overflow-hidden px-6 py-12 text-center sm:py-16"
-          style={{ borderRadius: "var(--radius-card)", background: "var(--gradient-brand)", boxShadow: "var(--shadow-lift)" }}
-        >
-          <h2
-            className="mx-auto max-w-md font-display font-extrabold text-white"
-            style={{ fontSize: "clamp(2rem,4vw,3rem)", lineHeight: 1.05, letterSpacing: "-0.02em" }}
-          >
-            Find the name that&apos;s yours.
+    <section className="border-t border-line bg-tint">
+      <div className="mx-auto w-full max-w-[44rem] px-6 py-14 text-center sm:py-20">
+        <Reveal>
+          <h2 className="font-display text-[1.9rem] font-bold tracking-[-0.02em] text-foreground sm:text-[2.5rem]">
+            The name you want is <span className="editorial">still free — for now.</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-md text-[17px] leading-snug text-white/90">
-            Most names cost about $5 a year, paid straight to the ENS protocol. We add nothing.
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              onCheck(value.trim());
+            }}
+            className="mx-auto mt-8 flex max-w-[30rem] items-stretch overflow-hidden rounded-[6px] border border-white/30 text-left transition focus-within:border-white/60"
+          >
+            <label htmlFor="cta-search" className="sr-only">
+              Search for your .eth name
+            </label>
+            <input
+              id="cta-search"
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              type="text"
+              autoComplete="off"
+              autoCapitalize="off"
+              spellCheck={false}
+              placeholder="yourname"
+              maxLength={32}
+              className="min-w-0 flex-1 bg-transparent px-5 py-4 text-base text-foreground outline-none focus-visible:outline-none placeholder:text-foreground/50"
+            />
+            <span className="flex select-none items-center pr-5 text-base text-foreground/50">
+              .eth
+            </span>
+            <button
+              type="submit"
+              className="shrink-0 bg-foreground px-6 text-sm font-semibold text-background transition hover:bg-white"
+            >
+              Check now
+            </button>
+          </form>
+          <p className="mt-5 text-[0.8125rem] text-foreground/50">
+            You pay ENS, not us. No account needed to search.
           </p>
-          <div className="mt-8">
-            <NameSearch onRegister={onRegister} placeholder="Search a name…" onGradient />
-          </div>
-        </div>
-      </Reveal>
+        </Reveal>
+      </div>
     </section>
   );
 }

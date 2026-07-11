@@ -62,7 +62,7 @@ export default function SecondaryMarket({
       className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-muted transition hover:text-foreground"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/grails-logo.svg" alt="Grails" className="h-[15px] w-auto dark:brightness-110" />
+      <img src="/grails-logo.svg" alt="Grails" className="h-[15px] w-auto brightness-110" />
       <span aria-hidden="true">· Secondary market</span>
     </a>
   );

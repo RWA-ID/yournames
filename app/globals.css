@@ -1,90 +1,61 @@
 @import "tailwindcss";
 
-/* Class-based dark mode (ThemeToggle flips `.dark` on <html>), not media-query. */
-@custom-variant dark (&:where(.dark, .dark *));
-
 /*
- * yournames.eth design tokens — light, warm, trustworthy (Stripe/Rainbow-level
- * polish). Forest (green) theme shipped as the default per the homepage handoff
- * (design_handoff_yournames_homepage). Display: Sora (--font-sora). Body: Inter
- * (--font-inter). Mono: JetBrains Mono (--font-jbmono) for addresses.
+ * yournames.eth "Dark Ledger" design tokens (design handoff:
+ * design_handoff_dark_ledger_homepage). Full-dark, editorial, institutional:
+ * ink background, warm paper text, hairline rules instead of shadows, crisp
+ * 4/6/8px corners. Display: Sora (--font-sora). Body: Inter (--font-inter).
+ * Editorial italic accent: Newsreader (--font-newsreader). Mono: JetBrains
+ * Mono (--font-jbmono) for addresses.
  *
- * The same tokens drive the marketing homepage and the /manage surfaces.
+ * The same tokens drive the marketing homepage, /manage, and the register
+ * modal — the site is single-theme (always dark) by design.
  */
 :root {
-  /* base palette — Forest theme overrides applied as default */
-  --background: #fbfdfb; /* warm off-white */
-  --foreground: #101828; /* near-black ink (gray-900) */
-  --muted: #667085; /* secondary text (gray-500) */
-  --surface: #ffffff; /* cards, header, inputs */
-  --tint: #f1f7f3; /* faint green well — fills "empty" full-bleed sections */
-  --header-bg: rgba(251, 253, 251, 0.82); /* translucent sticky header */
-  --line: #eaecf0; /* hairline borders (gray-200) */
+  /* base palette */
+  --background: #131318; /* near-black ink, slightly warm */
+  --foreground: #f4f3ef; /* warm paper white */
+  --muted: rgba(244, 243, 239, 0.65); /* secondary text */
+  --faint: rgba(244, 243, 239, 0.55); /* tertiary text / labels */
+  --surface: rgba(255, 255, 255, 0.03); /* cards, inputs */
+  --tint: rgba(255, 255, 255, 0.02); /* alternating full-bleed bands */
+  --header-bg: rgba(19, 19, 24, 0.85); /* translucent sticky header */
+  --line: rgba(255, 255, 255, 0.12); /* section hairlines, borders */
+  --line-faint: rgba(255, 255, 255, 0.09); /* table row rules */
+  --line-card: rgba(255, 255, 255, 0.14); /* card borders */
+  --line-strong: rgba(255, 255, 255, 0.25); /* emphasized top rules */
+  --line-paper: rgba(244, 243, 239, 0.6); /* strongest rules (column tops) */
 
-  --brand: #0e9f6e; /* forest green — primary buttons, links, focus */
-  --brand-strong: #0b7d57; /* brand fill hover */
-  --brand-soft: #e7f7ef; /* tinted chips/wells */
+  /*
+   * Primary action color = paper. Every `bg-brand` fill becomes a
+   * paper-white button with ink text (see the unlayered override below);
+   * text-brand/border-brand/accent-brand read as paper on ink.
+   */
+  --brand: #f4f3ef;
+  --brand-strong: #ffffff;
+  --brand-soft: rgba(255, 255, 255, 0.04); /* tinted chips/wells */
 
-  --sky: #14b8a6; /* accent */
-  --mint: #22c55e; /* accent + success */
-  --rose: #f43f5e; /* error / "taken" */
-  --amber: #f59e0b; /* warning / invalid input */
+  /* functional accents only — never decorative fills */
+  --sky: #38bdf8;
+  --mint: #34d399; /* live / available */
+  --rose: #fb7185; /* error / taken / strikethrough */
+  --amber: #fbbf24; /* warning / invalid input */
 
-  /* signature flourish — used as clipped text on the h1 keyword + wordmark */
-  --gradient-brand: linear-gradient(100deg, #0ea5e9 0%, #10b981 50%, #84cc16 100%);
-  --mesh-hero:
-    radial-gradient(40rem 28rem at 15% 10%, rgba(16, 185, 129, 0.16), transparent 60%),
-    radial-gradient(36rem 26rem at 85% 15%, rgba(20, 184, 166, 0.13), transparent 60%),
-    radial-gradient(40rem 30rem at 50% 95%, rgba(132, 204, 22, 0.12), transparent 60%);
+  /* brand gradient (indigo → sky → mint) — wordmark text clip ONLY */
+  --gradient-brand: linear-gradient(100deg, #4f46e5 0%, #0ea5e9 55%, #10b981 100%);
 
-  /* radius + shadow */
-  --radius-sm: 6px;
-  --radius-card: 1.5rem; /* cards, modals, wells */
-  --radius-input: 1rem; /* search bar, step badges */
-  --radius-pill: 9999px;
-  --sh-soft: 0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 24px rgba(16, 24, 40, 0.06);
-  --sh-lift: 0 2px 4px rgba(16, 24, 40, 0.05), 0 16px 40px rgba(16, 185, 129, 0.12);
-  --surface-solid: #ffffff; /* popovers/modals that must not be translucent */
+  /* radius (crisp, deliberately not the old pill language) + no shadows */
+  --radius-sm: 4px; /* buttons */
+  --radius-input: 6px; /* inputs */
+  --radius-card: 8px; /* cards, modals, wells */
+  --radius-pill: 4px;
+  --sh-soft: none; /* depth comes from hairlines, not shadows */
+  --sh-lift: none;
+  --surface-solid: #1b1b21; /* popovers/modals that must not be translucent */
 
   /* layout */
-  --container-max: 72rem;
-  --header-h: 4rem;
-  color-scheme: light;
-}
-
-/*
- * Dark "Deep Forest" theme. Opt-in via `html.dark` (toggled by ThemeToggle,
- * persisted in localStorage, applied pre-paint by the inline script in layout).
- * Every surface is a token, so overriding the variables here recolors the whole
- * site — marketing homepage and /manage alike — with no per-component edits.
- */
-html.dark {
-  --background: #0a1310;
-  --foreground: #e7ede9;
-  --muted: #93a39b;
-  --surface: #10201a;
-  --tint: #0d1a15;
-  --header-bg: rgba(10, 19, 16, 0.82);
-  --line: #1f3329;
-
-  --brand: #2dd4a0;
-  --brand-strong: #34e0ab;
-  --brand-soft: #112c22;
-
-  --sky: #2dd4bf;
-  --mint: #34d399;
-  --rose: #fb7185;
-  --amber: #fbbf24;
-
-  --gradient-brand: linear-gradient(100deg, #22d3ee 0%, #34d399 50%, #a3e635 100%);
-  --mesh-hero:
-    radial-gradient(40rem 28rem at 15% 10%, rgba(45, 212, 160, 0.13), transparent 60%),
-    radial-gradient(36rem 26rem at 85% 15%, rgba(45, 212, 191, 0.1), transparent 60%),
-    radial-gradient(40rem 30rem at 50% 95%, rgba(163, 230, 53, 0.08), transparent 60%);
-
-  --sh-soft: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
-  --sh-lift: 0 2px 4px rgba(0, 0, 0, 0.35), 0 16px 40px rgba(0, 0, 0, 0.45);
-  --surface-solid: #10201a;
+  --container-max: 76rem;
+  --header-h: 4.25rem;
   color-scheme: dark;
 }
 
@@ -92,9 +63,14 @@ html.dark {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
+  --color-faint: var(--faint);
   --color-surface: var(--surface);
   --color-tint: var(--tint);
   --color-line: var(--line);
+  --color-line-faint: var(--line-faint);
+  --color-line-card: var(--line-card);
+  --color-line-strong: var(--line-strong);
+  --color-line-paper: var(--line-paper);
   --color-brand: var(--brand);
   --color-brand-strong: var(--brand-strong);
   --color-brand-soft: var(--brand-soft);
@@ -126,7 +102,7 @@ section[id] {
   scroll-margin-top: var(--header-h);
 }
 
-/* Signature gradient, applied as clipped text (h1 keyword, wordmark "names"). */
+/* Signature gradient, applied as clipped text — the wordmark "names" only. */
 .text-gradient {
   background: var(--gradient-brand);
   -webkit-background-clip: text;
@@ -134,53 +110,58 @@ section[id] {
   color: transparent;
 }
 
+/* Newsreader italic — the editorial "twist" phrase inside headlines. */
+.editorial {
+  font-family: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* Small-caps eyebrow label. */
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
 /*
- * RegisterFlow + manage editors are shared flows that bake in Tailwind's
- * built-in `hover:bg-indigo-700`. Re-point it to the brand-strong green here
- * (unlayered, so it beats the layered utility) instead of editing every site.
+ * ---- Dark Ledger reskin of shared flows (unlayered, so these beat the
+ * layered Tailwind utilities) ------------------------------------------------
+ * RegisterFlow + the /manage editors bake in the old theme's language:
+ * `bg-brand … text-white` primary pills, `hover:bg-indigo-700`, rounded-full
+ * buttons, 1.5rem card corners. Re-pointing those utilities here restyles
+ * every shared flow at once instead of editing ~80 call sites.
  */
-.hover\:bg-indigo-700:hover {
-  background-color: var(--brand-strong);
+
+/* Primary action = paper fill, ink text (never a colored fill). */
+.bg-brand {
+  background: var(--foreground);
+  color: var(--background);
+}
+.hover\:bg-indigo-700:hover,
+.hover\:bg-brand-strong:hover {
+  background: #ffffff;
+  color: var(--background);
 }
 
-/* Floating gradient orbs in the hero (9s bob, staggered). */
-@keyframes yn-bob {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-12px);
-  }
+/* Crisp corners: interactive pills → 4px, tab rails → 6px, cards → 8px. */
+button.rounded-full,
+a.rounded-full,
+[role="tablist"].rounded-full {
+  border-radius: var(--radius-sm);
 }
-@media (prefers-reduced-motion: no-preference) {
-  .orb {
-    animation: yn-bob var(--bob-dur, 9s) ease-in-out var(--bob-delay, 0s) infinite;
-  }
+.rounded-xl,
+.rounded-2xl,
+.rounded-3xl {
+  border-radius: var(--radius-card);
 }
-
-/* Blinking caret for the phone typewriter. */
-@keyframes yn-blink {
-  0%,
-  45% {
-    opacity: 1;
-  }
-  55%,
-  100% {
-    opacity: 0;
-  }
-}
-.yn-caret {
-  display: inline-block;
-  width: 2px;
-  height: 22px;
-  background: #0a84ff;
-  margin-left: 2px;
-  vertical-align: middle;
-  animation: yn-blink 1s steps(1) infinite;
+.rounded-t-3xl {
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
 }
 
-/* Infinite logo marquee (pause on hover). */
+/* Infinite name ticker / logo marquee (pause on hover). */
 @keyframes yn-marquee {
   from {
     transform: translateX(0);
@@ -192,26 +173,31 @@ section[id] {
 .marquee-track {
   display: flex;
   width: max-content;
-  gap: 0.75rem;
+  gap: 3rem;
 }
 @media (prefers-reduced-motion: no-preference) {
   .marquee-track {
-    animation: yn-marquee 36s linear infinite;
+    animation: yn-marquee 32s linear infinite;
   }
   .marquee:hover .marquee-track {
     animation-play-state: paused;
   }
 }
-
 @media (prefers-reduced-motion: reduce) {
+  .marquee {
+    display: none;
+  }
   * {
     scroll-behavior: auto !important;
   }
 }
 
-/* Focus visibility for keyboard users */
-:focus-visible {
-  outline: 2px solid var(--brand);
-  outline-offset: 2px;
-  border-radius: 6px;
+/* Focus visibility for keyboard users (base layer so utilities can opt out —
+   the search inputs signal focus on their bordered container instead). */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--foreground);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
 }

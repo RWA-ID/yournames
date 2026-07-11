@@ -1,83 +1,60 @@
 "use client";
 
-import NameSearch from "./NameSearch";
+import Reveal from "./Reveal";
+import RegistryCheck, { type Seed } from "./RegistryCheck";
+import { focusNameSearch } from "./focusSearch";
 
 /*
- * Classic hero — soft radial mesh background, three blurred floating gradient
- * orbs, a centered column: fee badge → gradient h1 → subcopy → the live
- * NameSearch → a trust row of colored-dot claims.
+ * Hero — asymmetric editorial grid: headline column (Sora display + the
+ * Newsreader-italic twist line) beside the live "Registry check" ledger card.
  */
-export default function Hero({ onRegister }: { onRegister: (label: string) => void }) {
+export default function Hero({
+  onRegister,
+  seed,
+}: {
+  onRegister: (label: string) => void;
+  seed: Seed | null;
+}) {
   return (
-    <section id="top" className="relative overflow-hidden" style={{ background: "var(--mesh-hero)" }}>
-      {/* floating gradient orbs */}
-      <span
-        aria-hidden="true"
-        className="orb pointer-events-none absolute left-[7%] top-24 size-20 rounded-full"
-        style={{
-          background: "linear-gradient(135deg,rgba(16,185,129,0.35),rgba(14,165,233,0.2))",
-          filter: "blur(2px)",
-        }}
-      />
-      <span
-        aria-hidden="true"
-        className="orb pointer-events-none absolute right-[9%] top-36 size-12 rounded-full"
-        style={{
-          background: "linear-gradient(135deg,rgba(132,204,22,0.35),rgba(20,184,166,0.2))",
-          filter: "blur(2px)",
-          ["--bob-delay" as string]: "2s",
-        }}
-      />
-      <span
-        aria-hidden="true"
-        className="orb pointer-events-none absolute bottom-12 left-[18%] size-10 rounded-full"
-        style={{
-          background: "linear-gradient(135deg,rgba(20,184,166,0.3),rgba(16,185,129,0.2))",
-          filter: "blur(2px)",
-          ["--bob-delay" as string]: "4s",
-        }}
-      />
-
-      <div className="relative mx-auto max-w-3xl px-6 pb-16 pt-12 text-center sm:pb-24 sm:pt-20">
-        <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1.5 text-sm font-medium text-foreground shadow-soft">
+    <section
+      id="top"
+      className="mx-auto grid w-full max-w-[76rem] items-center gap-12 px-6 py-14 sm:px-8 lg:grid-cols-[1.15fr_1fr] lg:gap-[4.5rem] lg:pb-20 lg:pt-[5.5rem]"
+    >
+      <Reveal>
+        <p className="eyebrow flex items-center gap-2.5">
           <span className="size-1.5 rounded-full bg-mint" aria-hidden="true" />
-          0% platform fee — you pay ENS, not us
-        </span>
-
-        <h1
-          className="mt-6 font-display font-extrabold"
-          style={{ fontSize: "clamp(2.5rem,6vw,3.75rem)", lineHeight: 1.05, letterSpacing: "-0.03em" }}
-        >
-          Your name,
-          <br />
-          <span className="text-gradient">everywhere online.</span>
-        </h1>
-
-        <p className="mx-auto mt-5 max-w-lg text-lg leading-relaxed text-muted">
-          Claim a <strong className="text-foreground">.eth</strong> name — one identity for your
-          wallet, website, logins and profile across thousands of apps. It lives in your wallet, and
-          no company can take it away. Not even us.
+          For people and companies
         </p>
-
-        <div className="mt-9">
-          <NameSearch onRegister={onRegister} placeholder="Find your name…" />
+        <h1 className="mt-7 font-display text-[2.5rem] font-extrabold leading-[1.05] tracking-[-0.03em] text-foreground sm:text-[3.25rem] lg:text-[3.9rem]">
+          A name anyone can type.
+          <br />
+          <span className="editorial">An asset no one can take.</span>
+        </h1>
+        <p className="mt-6 max-w-[30rem] text-[1.0625rem] leading-[1.7] text-foreground/65">
+          One <strong className="font-semibold text-foreground">.eth</strong>{" "}
+          name replaces the
+          42-character address — for payments, logins, and your website. It lives in your wallet,
+          not on anyone&apos;s platform.
+        </p>
+        <div className="mt-9 flex flex-wrap items-center gap-6">
+          <button
+            onClick={focusNameSearch}
+            className="rounded-[4px] bg-foreground px-7 py-3.5 text-[0.9375rem] font-semibold text-background transition hover:bg-white"
+          >
+            Find your name
+          </button>
+          <a
+            href="#companies"
+            className="border-b border-foreground/35 pb-0.5 text-[0.9375rem] font-medium text-foreground/75 transition hover:text-foreground"
+          >
+            For companies →
+          </a>
         </div>
+      </Reveal>
 
-        <div className="mt-6 flex flex-wrap justify-center gap-x-5 gap-y-1.5 text-sm text-muted">
-          <span className="inline-flex items-center gap-1.5">
-            <span className="size-1.5 rounded-full bg-mint" aria-hidden="true" />
-            You truly own it
-          </span>
-          <span className="inline-flex items-center gap-1.5">
-            <span className="size-1.5 rounded-full" style={{ background: "var(--sky)" }} aria-hidden="true" />
-            Works in 1,000+ apps
-          </span>
-          <span className="inline-flex items-center gap-1.5">
-            <span className="size-1.5 rounded-full bg-brand" aria-hidden="true" />
-            Independent — not affiliated with ENS
-          </span>
-        </div>
-      </div>
+      <Reveal delay={0.1}>
+        <RegistryCheck onRegister={onRegister} seed={seed} />
+      </Reveal>
     </section>
   );
 }

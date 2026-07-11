@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Sora } from "next/font/google";
+import { Inter, JetBrains_Mono, Newsreader, Sora } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { SITE } from "@/lib/site";
@@ -19,6 +19,14 @@ const sora = Sora({
 const jbmono = JetBrains_Mono({
   variable: "--font-jbmono",
   subsets: ["latin"],
+  display: "swap",
+});
+
+/* Editorial italic accent — the "twist" phrase inside display headlines. */
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
+  subsets: ["latin"],
+  style: ["italic"],
   display: "swap",
 });
 
@@ -74,19 +82,8 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${sora.variable} ${jbmono.variable} h-full antialiased`}
+      className={`${inter.variable} ${sora.variable} ${jbmono.variable} ${newsreader.variable} h-full antialiased`}
     >
-      <head>
-        {/*
-         * Apply the saved (or system) theme before first paint to avoid a
-         * light→dark flash. Mirrors the localStorage key used by ThemeToggle.
-         */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem("yn-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.classList.add("dark")}}catch(e){}})();`,
-          }}
-        />
-      </head>
       <body className="min-h-full flex flex-col">
         <script
           type="application/ld+json"

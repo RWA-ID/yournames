@@ -189,7 +189,7 @@ export default function RegisterFlow({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-[rgba(5,4,14,0.62)] p-0 backdrop-blur-sm sm:items-center sm:p-6"
+      className="fixed inset-0 z-50 flex items-end justify-center bg-[rgba(9,9,12,0.66)] p-0 backdrop-blur-sm sm:items-center sm:p-6"
       role="dialog"
       aria-modal="true"
       aria-label={`Register ${name}`}
@@ -197,7 +197,7 @@ export default function RegisterFlow({
       <motion.div
         initial={{ y: 40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-t-3xl border border-line bg-[var(--surface-solid)] p-6 shadow-[0_30px_80px_rgba(5,4,14,0.8)] sm:rounded-3xl sm:p-8"
+        className="max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-t-[8px] border border-line-card bg-[var(--surface-solid)] p-6 shadow-[0_30px_80px_rgba(0,0,0,0.6)] sm:rounded-[8px] sm:p-8"
       >
         <div className="mb-5 flex items-start justify-between gap-4">
           <div>
@@ -343,7 +343,9 @@ export default function RegisterFlow({
           {step.id === "done" && (
             <motion.div key="done" {...fade} className="py-6 text-center">
               <Confetti />
-              <p className="font-display text-2xl font-bold">You own {step.name} 🎉</p>
+              <p className="font-display text-2xl font-bold">
+                You own {step.name} <span className="text-mint">✓</span>
+              </p>
               <p className="mx-auto mt-2 max-w-sm text-sm text-muted">
                 It&apos;s an NFT in your wallet now. Nobody can take it away — not us, not anyone.
                 Next: set an avatar and profile so apps recognize you.
@@ -367,8 +369,13 @@ export default function RegisterFlow({
 
           {step.id === "failed" && (
             <motion.div key="fail" {...fade} className="py-6 text-center">
-              <p className="text-3xl">😕</p>
-              <p className="mt-2 font-medium">{step.message}</p>
+              <span
+                className="mx-auto flex size-10 items-center justify-center rounded-full border border-rosex/50 text-lg font-semibold text-rosex"
+                aria-hidden="true"
+              >
+                ✕
+              </span>
+              <p className="mt-3 font-medium">{step.message}</p>
               <p className="mt-1 text-sm text-muted">
                 Nothing was lost — you can safely try again.
               </p>
@@ -438,8 +445,8 @@ function Row({ k, v, highlight = false }: { k: string; v: string; highlight?: bo
 function Pulse() {
   return (
     <div className="mx-auto flex size-16 items-center justify-center">
-      <span className="absolute size-16 animate-ping rounded-full bg-brand/20 motion-reduce:animate-none" />
-      <span className="size-10 rounded-full bg-gradient-to-br from-[#10b981] to-[#0b7d57] shadow-[0_0_22px_rgba(16,185,129,0.45)]" />
+      <span className="absolute size-16 animate-ping rounded-full bg-mint/20 motion-reduce:animate-none" />
+      <span className="size-10 rounded-full bg-mint" />
     </div>
   );
 }
@@ -475,7 +482,7 @@ function Countdown({ total, left }: { total: number; left: number }) {
 /** Lightweight CSS confetti (no extra dep); hidden under reduced motion. */
 function Confetti() {
   const pieces = Array.from({ length: 18 });
-  const colors = ["#0ea5e9", "#10b981", "#84cc16", "#22c55e", "#14b8a6"];
+  const colors = ["#4f46e5", "#0ea5e9", "#10b981", "#34d399", "#f4f3ef"];
   return (
     <div aria-hidden className="pointer-events-none relative mx-auto h-10 w-40 motion-reduce:hidden">
       {pieces.map((_, i) => (
